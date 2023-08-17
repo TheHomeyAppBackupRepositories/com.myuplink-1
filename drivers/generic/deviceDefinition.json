@@ -1,0 +1,25 @@
+{
+  "name": "Generic Device",
+  "driverId": "generic",
+  "basedOnHelp": "The basedOn is the deviceId of a device you want to use the myUplink dump for to create the dump",
+  "basedOn": "",
+  "onChangeHelp": "How to affect variables when an ID or variable changes",
+  "onChange": {
+    "all": {}
+  },
+  "onCreatedHelp": "How to set myUplink state and variables when the device is created",
+  "onCreated": {
+  },
+  "capHelp": "The capability Table is used to automatically create capabilities and link it to its respective identifiers in myUplink",
+  "capTable": {
+  },
+  "settingsHelp": "The settingsTable is used to automatically create a driver.settings.compose.json file for the driver.",
+  "settingsTable": {
+  },
+  "statusHelp": "The status table is used to expose myUplink features as status",
+  "statusTable": {
+  },
+  "ignoreHelp": "The ignoreTable is used by the configuration script to make sure no options are left out without being ignored",
+  "ignoreTable": [
+  ]
+}

@@ -1,0 +1,246 @@
+<form class="homey-form">
+    <p id="guide" data-i18n="pair.configure_device.guide"></p>
+    <div id="onoff_cap" class="homey-form-group"></div>
+    <div id="thermo_cap" class="homey-form-group"></div>
+    <div id="tempsensor_cap" class="homey-form-group"></div>
+    <div id="powersensor_cap" class="homey-form-group"></div>
+    <div id="powermeter_cap" class="homey-form-group"></div>
+    <div id="alarm_cap" class="homey-form-group"></div>
+    <div class="homey-form-group">
+      <select id='addcap_list' class="homey-form-select" onchange="">
+        <option value="add_onoff"       data-i18n="pair.configure_device.onoff">On/Off</option>
+        <option value="add_thermostat"  data-i18n="pair.configure_device.thermostat">Thermostat</option>
+        <option value="add_tempsensor"  data-i18n="pair.configure_device.tempsensor">Temperature</option>
+        <option value="add_powersensor" data-i18n="pair.configure_device.powersensor">Power</option>
+        <option value="add_powermeter"  data-i18n="pair.configure_device.powermeter">Power meter</option>
+        <option value="add_alarm"  data-i18n="pair.configure_device.alarm">Alarm</option>
+      </select>
+    </div>
+    <div class="homey-form-group">
+      <button id="add_cap" class="homey-button-primary-full" data-i18n="pair.configure_device.add" onclick="Homey.showView(document.getElementById('addcap_list').value); return false;">Add</button>
+    </div>
+    <p id="info" data-i18n="pair.configure_device.info"></p>
+</form>
+
+<script type="application/javascript">
+    Homey.showLoadingOverlay(Homey.__('pair.configure_device.wait'));
+    Homey.setTitle(Homey.__('pair.configure_device.title'))
+    Homey.setSubtitle(Homey.__('pair.configure_device.subtitle'))
+
+    /**
+     * Fetches the device points if not already done so
+     */
+    async function checkDevicePoints(devices) {
+      console.log('checkDevicePoints()');
+      return Homey.getViewStoreValue("configure_device", "devicePoints")
+        .then ((devicePoints) => {
+          if (devicePoints === undefined) {
+            console.log('Requesting device points');
+            return Homey.emit("getDevicePoints", { deviceId: devices[0].data.deviceId })
+              .then((result) => Homey.setViewStoreValue("configure_device", "devicePoints", result));
+          }
+          return Promise.resolve(); // Already fetched
+        })
+        .then(() => Promise.resolve(devices));
+    }
+
+    /**
+     * Updates the onOff capability list
+     */
+    async function updateOnOff(devices) {
+      console.log('updateOnOff()');
+      return Homey.getViewStoreValue("add_onoff", "onoff")
+        .then((onoffDefs) => {
+          if (Array.isArray(onoffDefs)) {
+            devices[0].store.onoffDefs = [...onoffDefs];
+            let options = `<p class="homey-subtitle">${Homey.__('pair.configure_device.onoff')}</p>`
+              + '<ul>';
+            for (let i = 0; i < onoffDefs.length; i++) {
+              options += `<li>${onoffDefs[i].id_text} = ${onoffDefs[i].onVal_text} / ${onoffDefs[i].offVal_text}</li>`;
+            }
+            options += '</ul>';
+            document.getElementById('onoff_cap').innerHTML = options;
+          }
+          return Promise.resolve(devices);
+        });
+    }
+
+    /**
+     * Updates the thermostat capability list
+     */
+    async function updateThermostats(devices) {
+      console.log('updateThermostats()');
+      return Homey.getViewStoreValue("add_thermostat", "termo")
+        .then((termoDefs) => {
+          if (Array.isArray(termoDefs)) {
+            devices[0].store.termoDefs = [...termoDefs];
+            let options = `<p class="homey-subtitle">${Homey.__('pair.configure_device.thermostat')}</p>`
+              + '<ul>';
+            for (let i = 0; i < termoDefs.length; i++) {
+              options += `<li>${termoDefs[i].sensorId_text}<br>${termoDefs[i].setterId_text}</li>`;
+            }
+            options += '</ul>';
+            document.getElementById('thermo_cap').innerHTML = options;
+          }
+          return Promise.resolve(devices);
+        });
+    }
+
+    /**
+     * Updates the temperature sensors list
+     */
+    async function updateTempSensors(devices) {
+      console.log('updateTempSensors()');
+      return Homey.getViewStoreValue("add_tempsensor", "sensor")
+        .then((definitions) => {
+          if (Array.isArray(definitions)) {
+            devices[0].store.tempDefs = [...definitions];
+            let options = `<p class="homey-subtitle">${Homey.__('pair.configure_device.tempsensor')}</p>`
+              + '<ul>';
+            for (let i = 0; i < definitions.length; i++) {
+              options += `<li>${definitions[i].sensorId_text}</li>`;
+            }
+            options += '</ul>';
+            document.getElementById('tempsensor_cap').innerHTML = options;
+          }
+          return Promise.resolve(devices);
+        });
+    }
+
+    /**
+     * Updates the power sensors list
+     */
+    async function updatePowerSensors(devices) {
+      console.log('updatePowerSensors()');
+      return Homey.getViewStoreValue("add_powersensor", "sensor")
+        .then((definitions) => {
+          if (Array.isArray(definitions)) {
+            devices[0].store.powerDefs = [...definitions];
+            let options = `<p class="homey-subtitle">${Homey.__('pair.configure_device.powersensor')}</p>`
+              + '<ul>';
+            for (let i = 0; i < definitions.length; i++) {
+              options += `<li>${definitions[i].sensorId_text}</li>`;
+            }
+            options += '</ul>';
+            document.getElementById('powersensor_cap').innerHTML = options;
+          }
+          return Promise.resolve(devices);
+        });
+    }
+
+    /**
+     * Updates the power sensors list
+     */
+    async function updatePowerMeters(devices) {
+      console.log('updatePowerMeters()');
+      return Homey.getViewStoreValue("add_powermeter", "sensor")
+        .then((definitions) => {
+          if (Array.isArray(definitions)) {
+            devices[0].store.meterDefs = [...definitions];
+            let options = `<p class="homey-subtitle">${Homey.__('pair.configure_device.powermeter')}</p>`
+              + '<ul>';
+            for (let i = 0; i < definitions.length; i++) {
+              options += `<li>${definitions[i].sensorId_text}</li>`;
+            }
+            options += '</ul>';
+            document.getElementById('powermeter_cap').innerHTML = options;
+          }
+          return Promise.resolve(devices);
+        });
+    }
+
+    /**
+     * Updates the power sensors list
+     */
+     async function updateAlarms(devices) {
+      console.log('updateAlarms()');
+      return Homey.getViewStoreValue("add_alarm", "alarm")
+        .then((definitions) => {
+          if (Array.isArray(definitions)) {
+            devices[0].store.alarmDefs = [...definitions];
+            let options = `<p class="homey-subtitle">${Homey.__('pair.configure_device.alarm')}</p>`
+              + '<ul>';
+            for (let i = 0; i < definitions.length; i++) {
+              options += `<li>${definitions[i].sensorId_text}</li>`;
+            }
+            options += '</ul>';
+            document.getElementById('alarm_cap').innerHTML = options;
+          }
+          return Promise.resolve(devices);
+        });
+    }
+
+    /**
+     * Updates the capabilities for the device
+     */
+    async function updateCapabilities(devices) {
+      console.log('updateCapabilities()');
+      const store = devices[0].store;
+      const onoffDefs = store.onoffDefs || [];
+      const termoDefs = store.termoDefs || [];
+      const tempDefs  = store.tempDefs  || [];
+      const powerDefs = store.powerDefs || [];
+      const meterDefs = store.meterDefs || [];
+      const alarmDefs = store.alarmDefs || [];
+      // Update definition in the store
+      devices[0].store.onChange = {
+        ...onoffDefs.reduce(function(m, o) { m[o.id] = {}; m[o.id][`$${o.capability}`] = `#${o.id} == ${o.offVal} ? 0 : 1`; return m; }, {}),
+        ...onoffDefs.reduce(function(m, o) { m[`$${o.capability}`] = {}; m[`$${o.capability}`][o.id] = `$${o.capability} ? ${o.onVal} : ${o.offVal}`; return m; }, {}),
+        ...alarmDefs.reduce(function(m, o) { m[o.sensorId] = {}; m[o.sensorId][`$${o.capability}`] = `#${o.sensorId} == ${o.onVal} ? 1 : 0`; return m; }, {}),
+      };
+      console.log('onChange:');
+      console.log(devices[0].store.onChange);
+      devices[0].store.capTable = {
+        ...onoffDefs.reduce(function(m, o) { m[`$${o.capability}`] = o.capability; return m; }, {}),
+        ...termoDefs.reduce(function(m, o) { m[o.setterId] = o.setcap; return m; }, {}),
+        ...termoDefs.reduce(function(m, o) { m[o.sensorId] = o.getcap; return m; }, {}),
+        ...tempDefs.reduce(function(m, o) { m[o.sensorId] = o.capability; return m; }, {}),
+        ...powerDefs.reduce(function(m, o) { m[o.sensorId] = o.capability; return m; }, {}),
+        ...meterDefs.reduce(function(m, o) { m[o.sensorId] = o.capability; return m; }, {}),
+        ...alarmDefs.reduce(function(m, o) { m[`$${o.capability}`] = o.capability; return m; }, {}),
+      };
+      console.log('capTable:');
+      console.log(devices[0].store.capTable);
+      devices[0].store.onCreated = {
+        ...onoffDefs.reduce(function(m, o) { const variable = `$${o.capability}`; m[variable] = 0; return m; }, {}),
+        ...alarmDefs.reduce(function(m, o) { const variable = `$${o.capability}`; m[variable] = 0; return m; }, {}),
+      };
+      console.log('onCreated:');
+      console.log(devices[0].store.onCreated);
+      // Reset the list
+      devices[0].capabilities = []
+        .concat(onoffDefs.map(x => x.capability))
+        .concat(termoDefs.map(x => x.setcap))
+        .concat(termoDefs.map(x => x.getcap))
+        .concat(tempDefs.map(x => x.capability))
+        .concat(powerDefs.map(x => x.capability))
+        .concat(meterDefs.map(x => x.capability))
+        .concat(alarmDefs.map(x => x.capability));
+      console.log('Caps:');
+      console.log(devices[0].capabilities);
+      devices[0].capabilitiesOptions = {
+        ...onoffDefs.reduce(function(m, o) { m[o.capability] = o.capOptions; return m; }, {}),
+        ...termoDefs.reduce(function(m, o) { m[o.setcap] = o.setcapOptions; return m; }, {}),
+        ...termoDefs.reduce(function(m, o) { m[o.getcap] = o.getcapOptions; return m; }, {}),
+        ...tempDefs.reduce(function(m, o) { m[o.capability] = o.capOptions; return m; }, {}),
+        ...powerDefs.reduce(function(m, o) { m[o.capability] = o.capOptions; return m; }, {}),
+        ...meterDefs.reduce(function(m, o) { m[o.capability] = o.capOptions; return m; }, {}),
+        ...alarmDefs.reduce(function(m, o) { m[o.capability] = o.capOptions; return m; }, {})
+      };
+
+      return Promise.resolve(devices);
+    }
+
+    Homey.getViewStoreValue("add_devices", "devices")
+      .then((devices) => checkDevicePoints(devices))
+      .then((devices) => updateOnOff(devices))
+      .then((devices) => updateThermostats(devices))
+      .then((devices) => updateTempSensors(devices))
+      .then((devices) => updatePowerSensors(devices))
+      .then((devices) => updatePowerMeters(devices))
+      .then((devices) => updateAlarms(devices))
+      .then((devices) => updateCapabilities(devices))
+      .then((devices) => Homey.setViewStoreValue("add_devices", "devices", devices))
+      .then(() => Homey.hideLoadingOverlay())
+      .catch((err) => Homey.showLoadingOverlay(`ERROR: ${err}`));
+</script>

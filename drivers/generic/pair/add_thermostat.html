@@ -1,0 +1,102 @@
+<form class="homey-form">
+    <div class="homey-form-group">
+      <legend class="homey-form-legend" data-i18n="pair.configure_termo.sensor" for="sensor_list"></legend>
+      <select id='sensor_list' class="homey-form-select" onchange="">
+        <option>Please wait while the list populates...</option>
+      </select>
+    </div>
+
+    <div class="homey-form-group">
+      <legend class="homey-form-legend" data-i18n="pair.configure_termo.setter" for="setter_list"></legend>
+      <select id='setter_list' class="homey-form-select" onchange="">
+        <option>Please wait while the list populates...</option>
+      </select>
+    </div>
+  
+    <div class="homey-form-group">
+      <button id="add_single_thermo" class="homey-button-primary-full is-loading" data-i18n="pair.configure_device.add" onclick="add(); return false;"></button>
+    </div>
+    <div class="homey-form-group">
+      <button class="homey-button-primary-full" data-i18n="pair.configure_device.back" onclick="Homey.showView('configure_device'); return false;"></button>
+    </div>
+</form>
+
+<script type="application/javascript">
+
+  // Adds the onoff capability to the onoff list
+  function add() {
+    let termoDefinition;
+    Homey.getViewStoreValue("configure_device", "devicePoints")
+      .then((devicePoints) => {
+        const sensor_select = document.getElementById('sensor_list');
+        const setter_select = document.getElementById('setter_list');
+        const sensorId_text = String(sensor_select.options[sensor_select.selectedIndex].text);
+        const setterId_text = String(setter_select.options[setter_select.selectedIndex].text);
+        const sensor_def = devicePoints[sensor_select.value];
+        const setter_def = devicePoints[setter_select.value];
+        termoDefinition = {
+          sensorId: sensor_select.value,
+          setterId: setter_select.value,
+          sensorId_text,
+          setterId_text,
+          getcapOptions: {
+            title: { en: sensorId_text },
+            units: { en: sensor_def.parameterUnit || '' },
+            // decimals: setter_def.,
+            // min: (sensor_def.minValue * +sensor_def.scaleValue) || 0,
+            // max: (sensor_def.maxValue * +sensor_def.scaleValue) || 90,
+            // step: +sensor_def.scaleValue || 0.5
+          },
+          setcapOptions: {
+            title: { en: setterId_text },
+            units: { en: setter_def.parameterUnit || '' },
+            // decimals: setter_def.,
+            min: (setter_def.minValue * +setter_def.scaleValue) || 0,
+            max: (setter_def.maxValue * +setter_def.scaleValue) || 90,
+            step: +setter_def.scaleValue || 0.5
+          }
+        }
+        return Homey.getViewStoreValue("add_thermostat", "termo");
+      })
+      .then((array) => (array || []))
+      .then((array) => {
+        const subcap = `.part${array.length}`;
+        termoDefinition.setcap = `target_temperature${array.length>0 ? subcap : ''}`;
+        termoDefinition.getcap = `measure_temperature${array.length>0 ? subcap : ''}`;
+        return array.concat([termoDefinition]);
+      })
+      .then((newTermoDefs) => Homey.setViewStoreValue("add_thermostat", "termo", newTermoDefs))
+      .then(() => Homey.showView('configure_device'));
+  }
+
+  Homey.showLoadingOverlay();
+  Homey.setTitle(Homey.__('pair.configure_device.title'))
+  Homey.setSubtitle(Homey.__('pair.configure_device.thermostat'))
+
+  Homey.getViewStoreValue("configure_device", "devicePoints")
+    .then((devicePoints) => {
+      const keys = Object.keys(devicePoints);
+      let setter_options = '';
+      let sensor_options = '';
+      let firstKey = undefined;
+      for (let i = 0; i < keys.length; i++) {
+        let key = keys[i];
+        firstKey ||= key;
+        let { parameterName, smartHomeCategories } = devicePoints[key];
+        // Ignore setter:  'sh-indoorSpOffsHeat', 'sh-indoorSpOffsCool'
+        // Ignore measure: 'sh-outdoorTemp', 'sh-supplyTemp', 'sh-returnTemp', 'sh-hwTemp'
+        // Ignore:         'sh-energyMetered', 'sh-hwBoost', 'sh-ventBoost'
+
+        if (smartHomeCategories.includes('sh-indoorSpHeat')) {
+          setter_options += `<option value='${key}'>${parameterName}</option>`;
+        }
+        if (smartHomeCategories.includes('sh-indoorTemp')) {
+          sensor_options += `<option value='${key}'>${parameterName}</option>`;
+        }
+      }
+      document.getElementById('setter_list').innerHTML = setter_options;
+      document.getElementById('sensor_list').innerHTML = sensor_options;
+      document.getElementById('add_single_thermo').classList.remove('is-loading')
+      Homey.hideLoadingOverlay();
+    });
+</script>

@@ -1,0 +1,44 @@
+{
+  "pair": {
+    "generic_info": {
+        "title": "Generic device",
+        "subtitle": "Info",
+        "info": "For your convenience, myUplink devices that do not yet have a driver in Homey can be mapped to this generic device.",
+        "note": "Please be advised that once your device has a dedicated driver, it is recommended that you install that one instead."
+    },
+    "configure_device": {
+      "title": "Generic device",
+      "subtitle": "Configure",
+      "onoff": "On/Off Capability",
+      "add_onoff": "Add",
+      "thermostat": "Thermostats",
+      "tempsensor": "Temp sensors",
+      "powersensor": "Power sensors",
+      "powermeter": "Power meters",
+      "alarm": "Alarm",
+      "add": "Add",
+      "back": "Back",
+      "change": "Change",
+      "guide": "Please map the myUplink parameters to Homey capabilities below",
+      "info": "All devicePoints that are not mapped above will still be setable/readable by using flows",
+      "wait": "Preparing configuration"
+    },
+    "configure_onoff": {
+      "select": "DevicePoint to map on/off capability to",
+      "on": "On value",
+      "off": "Off value",
+      "info": "If the devicePoint have a different value than what is defined by the on/off values below the capability will be regarded as on."
+    },
+    "configure_termo": {
+      "sensor": "Temperature sensor",
+      "setter": "Thermostat"
+    },
+    "configure_power": {
+      "sensor": "Power usage",
+      "meter": "Power meter"
+    },
+    "configure_alarm": {
+      "sensor": "Alarm"
+    }
+  }
+}

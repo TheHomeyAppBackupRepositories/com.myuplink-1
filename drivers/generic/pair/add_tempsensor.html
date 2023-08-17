@@ -1,0 +1,75 @@
+<form class="homey-form">
+  <div class="homey-form-group">
+    <legend class="homey-form-legend" data-i18n="pair.configure_termo.sensor" for="tempsensor_list"></legend>
+    <select id='tempsensor_list' class="homey-form-select" onchange="">
+      <option>Please wait while the list populates...</option>
+    </select>
+  </div>
+
+  <div class="homey-form-group">
+    <button id="add_single_temp" class="homey-button-primary-full is-loading" data-i18n="pair.configure_device.add" onclick="add(); return false;"></button>
+  </div>
+  <div class="homey-form-group">
+    <button class="homey-button-primary-full" data-i18n="pair.configure_device.back" onclick="Homey.showView('configure_device'); return false;"></button>
+  </div>
+</form>
+
+<script type="application/javascript">
+
+  // Adds the onoff capability to the onoff list
+  function add() {
+    let capDefinition;
+    Homey.getViewStoreValue("configure_device", "devicePoints")
+      .then((devicePoints) => {
+        const sensor_select = document.getElementById('tempsensor_list');
+        const sensorId_text = String(sensor_select.options[sensor_select.selectedIndex].text);
+        const sensor_def = devicePoints[sensor_select.value];
+        capDefinition = {
+          sensorId: sensor_select.value,
+          sensorId_text,
+          capOptions: {
+            title: { en: sensorId_text },
+            units: { en: sensor_def.parameterUnit || '' },
+            // decimals: setter_def.,
+            // min: sensor_def.minValue || 0,
+            // max: sensor_def.maxValue || 0,
+            // step: +sensor_def.scaleValue || 1
+          }
+        };
+        return Homey.getViewStoreValue("add_tempsensor", "sensor");
+      })
+      .then((array) => (array || []))
+      .then((array) => {
+        const subcap = `.sensor${array.length}`;
+        capDefinition.capability = `measure_temperature${subcap}`;
+        return array.concat([capDefinition]);
+      })
+      .then((newcapDefs) => Homey.setViewStoreValue("add_tempsensor", "sensor", newcapDefs))
+      .then(() => Homey.showView('configure_device'));
+  }
+
+  Homey.showLoadingOverlay();
+  Homey.setTitle(Homey.__('pair.configure_device.title'))
+  Homey.setSubtitle(Homey.__('pair.configure_device.tempsensor'))
+
+  Homey.getViewStoreValue("configure_device", "devicePoints")
+    .then((devicePoints) => {
+      const keys = Object.keys(devicePoints);
+      let sensor_options = '';
+      for (let i = 0; i < keys.length; i++) {
+        let key = keys[i];
+        let { parameterName, smartHomeCategories } = devicePoints[key];
+        // Ignore setter:  'sh-indoorSpOffsHeat', 'sh-indoorSpOffsCool'
+        // Ignore:         'sh-energyMetered', 'sh-hwBoost', 'sh-ventBoost'
+
+        let sensorNames = ['sh-outdoorTemp', 'sh-supplyTemp', 'sh-returnTemp', 'sh-hwTemp'];
+
+        if (sensorNames.some(value => smartHomeCategories.includes(value))) {
+          sensor_options += `<option value='${key}'>${parameterName}</option>`;
+        }
+      }
+      document.getElementById('tempsensor_list').innerHTML = sensor_options;
+      document.getElementById('add_single_temp').classList.remove('is-loading')
+      Homey.hideLoadingOverlay();
+    });
+</script>
