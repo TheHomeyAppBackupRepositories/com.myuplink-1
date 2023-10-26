@@ -4,14 +4,14 @@
 
 const { OAuth2Driver } = require('homey-oauth2app');
 
-class commonDriver extends OAuth2Driver {
+class hoiaxDriver extends OAuth2Driver {
 
   /**
    * onInit is called when the driver is initialized.
    */
   async onOAuth2Init() {
     // Register Flow Cards etc.
-    this.log('Driver initialized...');
+    this.log('Høiax driver has been initialized');
   }
 
   /**
@@ -45,4 +45,4 @@ class commonDriver extends OAuth2Driver {
 
 }
 
-module.exports = commonDriver;
+module.exports = hoiaxDriver;

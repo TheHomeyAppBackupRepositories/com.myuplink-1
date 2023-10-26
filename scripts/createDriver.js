@@ -79,6 +79,10 @@ async function analyzeFeatures(allFeatures, capTable) {
       type = { isCap: true, name: 'measure_temperature', sub: 'hw' };
     } else if (allFeatures[i].smartHomeCategories.includes('sh-energyMetered')) {
       type = { isCap: true, name: 'meter_power' };
+    } else if (allFeatures[i].smartHomeCategories.includes('sh-electricPowerUsedCurrently')) {
+      type = { isCap: true, name: 'measure_power' };
+    } else if (allFeatures[i].smartHomeCategories.includes('sh-hwMode')) {
+      type = { isCap: true, name: '??? mode' };
     } else if (allFeatures[i].smartHomeCategories.includes('sh-hwBoost')) {
       type = { isCap: true, name: 'onoff.hwBoost' };
     } else if (allFeatures[i].smartHomeCategories.includes('sh-ventBoost')) {
@@ -276,7 +280,6 @@ async function createSettings(driver, stateFile) {
     logProgress('Definition', `Created '${inFile}'`, 2);
     inData = {
       name: driver,
-      driverId: driver,
       basedOnHelp: 'The basedOn is the deviceId of a device you want to use the myUplink dump for to create the dump',
       basedOn: stateDump[selected].name,
       filterHelp: 'The filter identifies which devices are of this type',
@@ -348,7 +351,7 @@ async function createSettings(driver, stateFile) {
     // Skipped: category, timestamp, value, strVal, smartHomeCategories, zoneId
     const {
       value,
-      parameterId, parameterName, parameterUnit, writable, minValue, maxValue, enumValues, scaleValue
+      parameterId, parameterName, parameterUnit, writable, minValue, maxValue, enumValues, scaleValue, stepValue,
     } = allFeatures[i];
     const type = (Number.isFinite(value) && enumValues.length === 0) ? TYPE.NUMBER
       : (Number.isFinite(value)) ? TYPE.ENUM : TYPE.UNKNOWN;
@@ -360,6 +363,7 @@ async function createSettings(driver, stateFile) {
       maxValue,
       enumValues,
       scaleValue,
+      stepValue,
       type
     };
   }
@@ -436,8 +440,8 @@ async function createSettings(driver, stateFile) {
           },
           value: '???',
           hint: {
-            en: 'The Firmware version of the tank.',
-            no: 'Fastvareversjonen til tanken.'
+            en: 'The Firmware version of the device.',
+            no: 'Fastvareversjonen til enheten.'
           }
         },
         {
@@ -455,6 +459,24 @@ async function createSettings(driver, stateFile) {
           min: 5,
           max: 10 * 60,
           units: { en: 's' },
+        },
+        {
+          id: 'updateRateCache',
+          type: 'number',
+          label: {
+            en: 'Refresh rate for flows',
+            no: 'Oppdateringsfrekvens for flytkort'
+          },
+          hint: {
+            en: 'Number of seconds between every refresh of flow cards.',
+            no: 'Antall sekunder mellom hver oppdatering av flytkort.'
+          },
+          value: 300,
+          min: 5,
+          max: 600,
+          units: {
+            en: 's'
+          }
         },
         {
           id: 'updateRateSettings',
@@ -521,7 +543,7 @@ async function createSettings(driver, stateFile) {
         if (type.i !== null) {
           newCapOptions['title'] = allFeatures[type.i].parameterName;
           if (('minValue' in allFeatures[type.i]) && (allFeatures[type.i].minValue !== null)) {
-            newCapOptions['step'] = 1; // +allFeatures[type.i].scaleValue;
+            newCapOptions['step'] = allFeatures[type.i].stepValue * +allFeatures[type.i].scaleValue;
             newCapOptions['min'] = allFeatures[type.i].minValue * +allFeatures[type.i].scaleValue;
             newCapOptions['max'] = allFeatures[type.i].maxValue * +allFeatures[type.i].scaleValue;
           }

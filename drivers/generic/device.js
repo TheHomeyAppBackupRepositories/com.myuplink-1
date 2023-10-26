@@ -6,18 +6,30 @@
 'use strict';
 
 const { OAuth2Device } = require('homey-oauth2app');
-const DeviceDefinition = require('./deviceDefinition.json');
+const fs = require('fs');
 const { TYPE } = require('../../lib/common');
 
 class genericDevice extends OAuth2Device {
 
   async onSettings({ oldSettings, newSettings, changedKeys }) {
     this.log('Settings changed - ');
-    this.log(oldSettings);
-    this.log('New settings');
-    this.log(newSettings);
-    this.log('keys');
-    this.log(changedKeys);
+    if (changedKeys.length === 0) {
+      return Promise.resolve();
+    }
+    const newState = {};
+    for (let i = 0; i < changedKeys.length; i++) {
+      const settingName = changedKeys[i];
+      if (settingName.substring(0, 8) === 'setting_') {
+        const newVal = newSettings[settingName];
+        const devicePoint = settingName.substring(8);
+        newState[devicePoint] = +newVal;
+      }
+    }
+    if (Object.keys(newState).length > 0) {
+      this.log('Saved setting changes to myUplink:');
+      this.log(newState);
+      return this.oAuth2Client.setDevicePoint(this.instanceId, newState);
+    }
     return Promise.resolve();
   }
 
@@ -29,11 +41,16 @@ class genericDevice extends OAuth2Device {
    * onOAuth2Init is called when the device is initialized.
    */
   async onOAuth2Init() {
-    this.deviceDefinition = DeviceDefinition;
-    this.log(`Initializing device of type ${this.deviceDefinition.name}`);
     try {
       this.setUnavailable('Initializing device.');
-      this.deviceId = this.getData().deviceId;
+      this.log('Reading device definitions');
+      this.setupData = this.getData();
+      const fileName = ('definitionFile' in this.setupData) ? this.setupData.definitionFile : 'Experimental.json';
+      const fullFileName = `${await this.homey.app.getBasePath()}/drivers/${this.driver.id}/devices/${fileName}`;
+      this.deviceDefinition = JSON.parse(fs.readFileSync(fullFileName));
+
+      this.log(`Initializing device of type '${this.deviceDefinition.name}'`);
+      this.deviceId = this.setupData.deviceId;
       this.killed = false;
 
       // === Backward compatibility ===
@@ -54,74 +71,10 @@ class genericDevice extends OAuth2Device {
 
       await this.oAuth2Client.initDevice(this, this.deviceDefinition);
 
-      // Add action cards
-      const cardActionSetDevicePoint = this.homey.flow.getActionCard('set_devicepoint');
-      cardActionSetDevicePoint.registerRunListener(async (args) => {
-        return this.onSetDevicePoint(args.devicePoint.id, args.newValue.id);
-      });
-      cardActionSetDevicePoint.registerArgumentAutocompleteListener(
-        'devicePoint',
-        async (query, args) => {
-          return this.generateDevicePointList(query, args, true);
-        }
-      );
-      cardActionSetDevicePoint.registerArgumentAutocompleteListener(
-        'newValue',
-        async (query, args) => {
-          return this.generateDevicePointValueList(query, args);
-        }
-      );
-
-      const cardActionSetDevicePointNumeric = this.homey.flow.getActionCard('set_devicepoint_numeric');
-      cardActionSetDevicePointNumeric.registerRunListener(async (args) => {
-        return this.onSetDevicePoint(args.devicePoint.id, args.newValue);
-      });
-      cardActionSetDevicePointNumeric.registerArgumentAutocompleteListener(
-        'devicePoint',
-        async (query, args) => {
-          return this.generateDevicePointList(query, args, true);
-        }
-      );
-
-      // Add condition cards
-      const cardConditionEqualDevicePoint = this.homey.flow.getConditionCard('devicepoint_is');
-      cardConditionEqualDevicePoint.registerRunListener(async (args, state) => {
-        const value = +args.value.id;
-        const stateValue = +this.oAuth2Client.confirmedDevicePoints[args.devicePoint.id];
-        this.log(`Checking if ${stateValue} ${args.condition} ${value}`);
-        const passed = ((args.condition === 'eq') && (value === stateValue))
-          || ((args.condition === 'gt') && (stateValue > value))
-          || ((args.condition === 'lt') && (stateValue < value));
-        return passed;
-      });
-      cardConditionEqualDevicePoint.registerArgumentAutocompleteListener(
-        'devicePoint',
-        async (query, args) => {
-          return this.generateDevicePointList(query, args, false);
-        }
-      );
-      cardConditionEqualDevicePoint.registerArgumentAutocompleteListener(
-        'value',
-        async (query, args) => {
-          return this.generateDevicePointValueList(query, args);
-        }
-      );
-
-      // Add trigger cards
-      const cardTriggerDevicePointChanged = this.homey.flow.getDeviceTriggerCard('devicepoint_changed');
-      cardTriggerDevicePointChanged.registerRunListener(async (args, state) => {
-        return Promise.resolve(+state.devicePoint === +args.devicePoint.id);
-      });
-      cardTriggerDevicePointChanged.registerArgumentAutocompleteListener(
-        'devicePoint',
-        async (query, args) => {
-          return this.generateDevicePointList(query, args, false);
-        }
-      );
-
       // Initialization complete
       this.setAvailable();
     } catch (err) {
+      this.setUnavailable(err);
       this.log(`onOAuth2Init err: ${err}`);
     }
   }
@@ -133,7 +86,7 @@ class genericDevice extends OAuth2Device {
   }
 
   /**
-   * Sets the
+   * Called when a flow is called to set a devicePoint
    */
   async onSetDevicePoint(devicePoint, newValue) {
     const devPointDef = this.deviceDefinition.devPointTable[devicePoint];
@@ -156,7 +109,9 @@ class genericDevice extends OAuth2Device {
 
     const newState = {};
     newState[devicePoint] = +newValue;
-    return this.oAuth2Client.setDevicePoint(this.deviceId, newState);
+    // When the devicepoint has been set, immediately trigger a read of the devicepoint in order to trigger internal state updates
+    return this.oAuth2Client.setDevicePoint(this.instanceId, newState)
+      .then(() => this.oAuth2Client.getDevicePoints(this.deviceId, String(devicePoint)));
   }
 
   /**
@@ -168,65 +123,6 @@ class genericDevice extends OAuth2Device {
     const tokens = { value, strVal };
     const state = { devicePoint };
     return cardTriggerDevicePointChanged.trigger(this, tokens, state);
-  }
-
-  /**
-   * Generates a list of device points that can be set
-   */
-  async generateDevicePointList(query, args, writableOnly) {
-    const devpointMap = args.device.deviceDefinition.devPointTable;
-    const devPoints = Object.keys(devpointMap);
-    const results = [];
-
-    // Reset old parameter as it becomes invalid
-    args.newValue = undefined;
-
-    args.device.log(`generate args dev point list: ${JSON.stringify(Object.keys(args))}`);
-
-    for (let i = 0; i < devPoints.length; i++) {
-      const id = devPoints[i];
-      if (writableOnly && !devpointMap[id].writable) continue;
-      const {
-        type, minValue, maxValue, scaleValue, parameterUnit, writable
-      } = devpointMap[id];
-      const name = typeof devpointMap[id].parameterName === 'string' ? devpointMap[id].parameterName : this.homey.__(devpointMap[id].parameterName);
-      const newOption = {
-        name,
-        id: String(id)
-      };
-      let range;
-      switch (type) {
-        case TYPE.ENUM:
-          newOption.description = `An enum value for parameter ${id}.`;
-          break;
-        case TYPE.NUMBER:
-          range = writable ? `between [${minValue * +scaleValue}, ${maxValue * +scaleValue}]` : 'of type';
-          newOption.description = `A numeric value ${range} ${parameterUnit}.`;
-          break;
-        default:
-          continue;
-      }
-      results.push(newOption);
-    }
-
-    return results.filter((result) => {
-      return result.name.toLowerCase().includes(query.toLowerCase());
-    });
-  }
-
-  /**
-   * Generates a list of values that are legal for a specific device point
-   */
-  async generateDevicePointValueList(query, args) {
-    args.device.log(`generate args for dev point: ${JSON.stringify(Object.keys(args))}`);
-
-    if (args.devicePoint === 'undefined') return [];
-
-    const results = await args.device.oAuth2Client.getDevicePointValues(args.devicePoint.id);
-
-    return results.filter((result) => {
-      return result.name.toLowerCase().includes(query.toLowerCase());
-    });
   }
 
 }

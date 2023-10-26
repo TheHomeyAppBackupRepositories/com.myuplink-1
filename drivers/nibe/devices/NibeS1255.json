@@ -1,0 +1,1635 @@
+{
+  "name": "Nibe S1255 (not ready)",
+  "icon": "NibeS1255.svg",
+  "basedOnHelp": "The basedOn is the deviceId of a device you want to use the myUplink dump for to create the dump",
+  "basedOn": "S1255-12 BRISTOL LINBUS LAB2",
+  "filterHelp": "The filter identifies which devices are of this type",
+  "filter": {
+    "deviceName": "NIBE S1255-6 E PC EM 3X400V"
+  },
+  "capabilities": [
+    "measure_temperature",
+    "measure_temperature.hw6",
+    "measure_temperature.hw7",
+    "measure_temperature.indoor19",
+    "measure_temperature.indoor20",
+    "measure_temperature.indoor21",
+    "measure_temperature.indoor22",
+    "measure_temperature.indoor23",
+    "measure_temperature.indoor24",
+    "measure_temperature.outdoor11",
+    "measure_temperature.return13",
+    "measure_temperature.return14",
+    "measure_temperature.return5",
+    "measure_temperature.return8",
+    "measure_temperature.supply10",
+    "measure_temperature.supply12",
+    "measure_temperature.supply15",
+    "measure_temperature.supply16",
+    "measure_temperature.supply17",
+    "measure_temperature.supply18",
+    "measure_temperature.supply2",
+    "measure_temperature.supply3",
+    "measure_temperature.supply4",
+    "measure_temperature.supply9",
+    "meter_power",
+    "meter_power.sub2",
+    "meter_power.sub3",
+    "meter_power.sub4",
+    "meter_power.sub5",
+    "onoff.hwBoost1",
+    "onoff.ventBoost1",
+    "target_temperature",
+    "target_temperature.indoor5",
+    "target_temperature.indoor6",
+    "target_temperature.indoor7",
+    "target_temperature.offsCool4",
+    "target_temperature.offsHeat2",
+    "target_temperature.offsHeat3"
+  ],
+  "onChangeHelp": "How to affect variables when an ID or variable changes",
+  "onChange": {},
+  "onCreatedHelp": "How to set myUplink state and variables when the device is created",
+  "onCreated": {},
+  "capHelp": "The capability Table is used to automatically create capabilities and link it to its respective identifiers in myUplink",
+  "capTable": {
+    "4": "measure_temperature",
+    "5": "measure_temperature.supply2",
+    "7": "measure_temperature.supply3",
+    "8": "measure_temperature.supply4",
+    "10": "measure_temperature.return5",
+    "11": "measure_temperature.hw6",
+    "12": "measure_temperature.hw7",
+    "13": "measure_temperature.return8",
+    "14": "measure_temperature.supply9",
+    "15": "measure_temperature.supply10",
+    "54": "measure_temperature.outdoor11",
+    "57": "measure_temperature.supply12",
+    "96": "measure_temperature.return13",
+    "98": "measure_temperature.return14",
+    "1705": "measure_temperature.supply15",
+    "1707": "measure_temperature.supply16",
+    "1708": "measure_temperature.supply17",
+    "2695": "measure_temperature.supply18",
+    "2716": "meter_power",
+    "2717": "meter_power.sub2",
+    "2720": "meter_power.sub3",
+    "2721": "meter_power.sub4",
+    "3668": "target_temperature",
+    "3670": "target_temperature.offsHeat2",
+    "3671": "target_temperature.offsHeat3",
+    "5033": "target_temperature.offsCool4",
+    "7086": "onoff.hwBoost1",
+    "8121": "onoff.ventBoost1",
+    "15753": "meter_power.sub5",
+    "47750": "target_temperature.indoor5",
+    "47751": "target_temperature.indoor6",
+    "47752": "target_temperature.indoor7",
+    "48350": "measure_temperature.indoor19",
+    "48351": "measure_temperature.indoor20",
+    "48352": "measure_temperature.indoor21",
+    "50672": "measure_temperature.indoor22",
+    "50673": "measure_temperature.indoor23",
+    "50674": "measure_temperature.indoor24"
+  },
+  "settingsHelp": "The settings table is used to expose myUplink features as settings",
+  "settingsTable": {
+    "781": "setting_781",
+    "3830": "setting_3830",
+    "4789": "setting_4789"
+  },
+  "statusHelp": "The status table is used to expose myUplink features as status",
+  "statusTable": {
+    "16": "status_16",
+    "17": "status_17",
+    "19": "status_19",
+    "22": "status_22",
+    "23": "status_23",
+    "58": "status_58",
+    "60": "status_60",
+    "64": "status_64",
+    "65": "status_65",
+    "66": "status_66",
+    "148": "status_148",
+    "167": "status_167",
+    "1756": "status_1756",
+    "1965": "status_1965",
+    "1975": "status_1975",
+    "1977": "status_1977",
+    "5927": "status_5927",
+    "10845": "status_10845",
+    "10863": "status_10863",
+    "10905": "status_10905",
+    "10906": "status_10906",
+    "12482": "status_12482",
+    "12483": "status_12483",
+    "12623": "status_12623",
+    "14950": "status_14950",
+    "22130": "status_22130",
+    "25154": "status_25154",
+    "25155": "status_25155",
+    "25157": "status_25157",
+    "25158": "status_25158",
+    "25159": "status_25159",
+    "25161": "status_25161",
+    "25162": "status_25162",
+    "25163": "status_25163",
+    "25919": "status_25919",
+    "25920": "status_25920",
+    "25921": "status_25921",
+    "25922": "status_25922",
+    "55000": "status_55000",
+    "55027": "status_55027"
+  },
+  "ignoredHelp": "The ignored table list capabilities that are not exposed at all",
+  "ignoredTable": {},
+  "devPointTable": {
+    "4": {
+      "parameterName": {
+        "en": "Current outdoor temper­ature (BT1)",
+        "sv": "Aktuell ute­temperatur (BT1)",
+        "de": "Aktu­elle Außen­luft­tempe­ratur (BT1)",
+        "da": "Aktuel ude­tempe­ratur (BT1)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "5": {
+      "parameterName": {
+        "en": "Supply line (EP23-BT2)",
+        "sv": "Fram­ledning (EP23-BT2)",
+        "de": "Vorlauf (EP23-BT2)",
+        "da": "Fremløb (EP23-BT2)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "7": {
+      "parameterName": {
+        "en": "Supply line (EP21-BT2)",
+        "sv": "Fram­ledning (EP21-BT2)",
+        "de": "Vorlauf (EP21-BT2)",
+        "da": "Fremløb (EP21-BT2)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "8": {
+      "parameterName": {
+        "en": "Supply line (BT2)",
+        "sv": "Fram­ledning (BT2)",
+        "de": "Vorlauf (BT2)",
+        "da": "Fremløb (BT2)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "10": {
+      "parameterName": {
+        "en": "Return line (BT3)",
+        "sv": "Retur­ledning (BT3)",
+        "de": "Rück­lauf (BT3)",
+        "da": "Retur­løb (BT3)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "11": {
+      "parameterName": {
+        "en": "Hot water top (BT7)",
+        "sv": "Varm­vatten topp (BT7)",
+        "de": "Brauch­wasser, oben (BT7)",
+        "da": "Varmt­vand top (BT7)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "12": {
+      "parameterName": {
+        "en": "Hot water char­ging (BT6)",
+        "sv": "Varm­vatten laddning (BT6)",
+        "de": "Brauch­wasser­berei­tung (BT6)",
+        "da": "Varmt­vands­ladning (BT6)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "13": {
+      "parameterName": {
+        "en": "Brine in (BT10)",
+        "sv": "Köld­bärare in (BT10)",
+        "de": "Ein­tritt Wärme­quellen­medium (BT10)",
+        "da": "Kulde­bærer ind (BT10)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "14": {
+      "parameterName": {
+        "en": "Brine out (BT11)",
+        "sv": "Köld­bärare ut (BT11)",
+        "de": "Aus­tritt Wärme­quellen­medium (BT11)",
+        "da": "Kulde­bærer ud (BT11)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "15": {
+      "parameterName": {
+        "en": "Con­denser (BT12)",
+        "sv": "Kondensor (BT12)",
+        "de": "Konden­sator (BT12)",
+        "da": "Konden­sator (BT12)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "16": {
+      "parameterName": {
+        "en": "Discharge (BT14)",
+        "sv": "Hetgas (BT14)",
+        "de": "Heißgas (BT14)",
+        "da": "Varmgas (BT14)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "17": {
+      "parameterName": {
+        "en": "Liquid line (BT15)",
+        "sv": "Vätske­ledning (BT15)",
+        "de": "Flüssig­keits­leitung (BT15)",
+        "da": "Væske­ledning (BT15)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "19": {
+      "parameterName": {
+        "en": "Suction gas (BT17)",
+        "sv": "Suggas (BT17)",
+        "de": "Sauggas (BT17)",
+        "da": "Sugegas (BT17)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "22": {
+      "parameterName": "Exh. air (AZ30-BT20)",
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "23": {
+      "parameterName": "Extr. air (AZ30-BT21)",
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "54": {
+      "parameterName": {
+        "en": "Average temper­ature (BT1)",
+        "sv": "Medel­temperatur (BT1)",
+        "de": "Mitt­lere Tempe­ratur (BT1)",
+        "da": "Middel­tempe­ratur (BT1)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "57": {
+      "parameterName": {
+        "en": "Exter­nal supply line (BT25)",
+        "sv": "Extern fram­ledning (BT25)",
+        "de": "Ex­terner Vor­lauf (BT25)",
+        "da": "Eks­ternt fremløb (BT25)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "58": {
+      "parameterName": {
+        "en": "Flow sensor (BF1)",
+        "sv": "Flödes­givare (BF1)",
+        "de": "Volumen­strom­messer (BF1)",
+        "da": "Flow­måler (BF1)"
+      },
+      "parameterUnit": "l/m",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "60": {
+      "parameterName": {
+        "en": "Supp. air (AZ30-BT22)",
+        "sv": "Tilluft (AZ30-BT22)",
+        "de": "Zuluft (AZ30-BT22)",
+        "da": "Indblæs­nings­luft (AZ30-BT22)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "64": {
+      "parameterName": {
+        "en": "Current (BE3)",
+        "sv": "Ström (BE3)",
+        "de": "Strom (BE3)",
+        "da": "Strøm (BE3)"
+      },
+      "parameterUnit": "A",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "65": {
+      "parameterName": {
+        "en": "Current (BE2)",
+        "sv": "Ström (BE2)",
+        "de": "Strom (BE2)",
+        "da": "Strøm (BE2)"
+      },
+      "parameterUnit": "A",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "66": {
+      "parameterName": {
+        "en": "Current (BE1)",
+        "sv": "Ström (BE1)",
+        "de": "Strom (BE1)",
+        "da": "Strøm (BE1)"
+      },
+      "parameterUnit": "A",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "96": {
+      "parameterName": {
+        "en": "Return line (EP23-BT3)",
+        "sv": "Retur­ledning (EP23-BT3)",
+        "de": "Rück­lauf (EP23-BT3)",
+        "da": "Retur­løb (EP23-BT3)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "98": {
+      "parameterName": {
+        "en": "Return line (EP21-BT3)",
+        "sv": "Retur­ledning (EP21-BT3)",
+        "de": "Rück­lauf (EP21-BT3)",
+        "da": "Retur­løb (EP21-BT3)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "148": {
+      "parameterName": {
+        "en": "Outd temp­erature (AZ30-BT23)",
+        "sv": "Ute­temperatur (AZ30-BT23)",
+        "de": "Außen­luft­tempe­ratur (AZ30-BT23)",
+        "da": "Udetem­peratur (AZ30-BT23)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "167": {
+      "parameterName": {
+        "en": "Average temper­ature (BT74)",
+        "sv": "Medel­temperatur (BT74)",
+        "de": "Mitt­lere Tempe­ratur (BT74)",
+        "da": "Middel­tempe­ratur (BT74)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "781": {
+      "parameterName": {
+        "en": "Degree minutes",
+        "sv": "Grad­minuter",
+        "de": "Grad­minuten",
+        "da": "Grad­minut­ter"
+      },
+      "parameterUnit": "DM",
+      "writable": true,
+      "minValue": -30000,
+      "maxValue": 30000,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "1705": {
+      "parameterName": {
+        "en": "Calcu­lated supply climate system 4",
+        "sv": "Beräknad fram­ledning klimat­system 4",
+        "de": "Berech­neter Vorlauf Klima­tisier­ungs­system 4",
+        "da": "Bereg­net fremløb klima­anlæg 4"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "1707": {
+      "parameterName": {
+        "en": "Calcu­lated supply climate system 2",
+        "sv": "Beräknad fram­ledning klimat­system 2",
+        "de": "Berech­neter Vorlauf Klima­tisie­rungs­system 2",
+        "da": "Bereg­net fremløb klima­anlæg 2"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "1708": {
+      "parameterName": {
+        "en": "Calcu­lated supply climate system 1",
+        "sv": "Beräknad fram­ledning klimat­system 1",
+        "de": "Berech­neter Vorlauf Klima­tisie­rungs­system 1",
+        "da": "Bereg­net fremløb klima­anlæg 1"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "1756": {
+      "parameterName": {
+        "en": "Power inter­nal addi­tional heat",
+        "sv": "Effekt intern till­sats",
+        "de": "Leis­tung interne Zusatz­heizung",
+        "da": "Effekt internt tilskud"
+      },
+      "parameterUnit": "kW",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.01",
+      "type": 1
+    },
+    "1965": {
+      "parameterName": {
+        "en": "Oper­ating mode com­pressor",
+        "sv": "Drift­läge kompressor",
+        "de": "Be­triebs­modus Ver­dichter",
+        "da": "Drifts­indstil­ling kom­pressor"
+      },
+      "parameterUnit": "",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [
+        {
+          "value": "20",
+          "text": {
+            "en": "Off",
+            "sv": "Från",
+            "de": "Aus",
+            "da": "Fra"
+          },
+          "icon": ""
+        },
+        {
+          "value": "40",
+          "text": {
+            "en": "Starting",
+            "sv": "Startar",
+            "de": "Startet",
+            "da": "Starter"
+          },
+          "icon": ""
+        },
+        {
+          "value": "60",
+          "text": {
+            "en": "On",
+            "sv": "Till",
+            "de": "Ein",
+            "da": "Til"
+          },
+          "icon": ""
+        },
+        {
+          "value": "100",
+          "text": {
+            "en": "Stop­ping",
+            "sv": "Stoppar",
+            "de": "Stoppt",
+            "da": "Stopper"
+          },
+          "icon": ""
+        },
+        {
+          "value": "120",
+          "text": {
+            "en": "Defrost­ing",
+            "sv": "Avfrostar",
+            "de": "Ent­eisung wird durch­geführt",
+            "da": "Afrimer"
+          },
+          "icon": ""
+        },
+        {
+          "value": "140",
+          "text": {
+            "en": "Defrost­ing",
+            "sv": "Avfrostar",
+            "de": "Ent­eisung wird durch­geführt",
+            "da": "Afrimer"
+          },
+          "icon": ""
+        },
+        {
+          "value": "160",
+          "text": {
+            "en": "Defrost­ing",
+            "sv": "Avfrostar",
+            "de": "Ent­eisung wird durch­geführt",
+            "da": "Afrimer"
+          },
+          "icon": ""
+        }
+      ],
+      "scaleValue": "1",
+      "type": 2
+    },
+    "1975": {
+      "parameterName": {
+        "en": "Heating medium pump speed (GP1)",
+        "sv": "Värme­bärar­pump­hastighet (GP1)",
+        "de": "Dreh­zahl Hei­zungs­umwälz­pumpe (GP1)",
+        "da": "Varme­bærer­pumpe­hastig­hed (GP1)"
+      },
+      "parameterUnit": "%",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "1",
+      "type": 1
+    },
+    "1977": {
+      "parameterName": {
+        "en": "Brine pump speed (GP2)",
+        "sv": "Köld­bärar­pump­hastighet (GP2)",
+        "de": "Dreh­zahl Wärme­quellen­pumpe (GP2)",
+        "da": "Kulde­bærer­pumpe­hastig­hed (GP2)"
+      },
+      "parameterUnit": "%",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "1",
+      "type": 1
+    },
+    "2695": {
+      "parameterName": {
+        "en": "Calcu­lated cooling supply climate system 1",
+        "sv": "Beräknad kyl­fram­ledning klimat­system 1",
+        "de": "Berech­neter Küh­lungs­vorlauf Klima­tisie­rungs­system 1",
+        "da": "Bereg­net køle­fremløb klima­anlæg 1"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "2716": {
+      "parameterName": {
+        "en": "Hot water, includ­ing int. add. heat",
+        "sv": "Varm­vatten, inkl­usive intern till­sats",
+        "de": "Brauch­wasser, einschl. in­terner ZH",
+        "da": "Varmt­vand, inklu­sive internt tilskud"
+      },
+      "parameterUnit": "kWh",
+      "writable": false,
+      "minValue": 0,
+      "maxValue": 9999999,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "2717": {
+      "parameterName": {
+        "en": "Heating, includ­ing int. add. heat",
+        "sv": "Värme, inkl­usive intern till­sats",
+        "de": "Hei­zung, einschl. in­terner ZH",
+        "da": "Varme, inklu­sive internt tilskud"
+      },
+      "parameterUnit": "kWh",
+      "writable": false,
+      "minValue": 0,
+      "maxValue": 9999999,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "2720": {
+      "parameterName": {
+        "en": "Hot water, com­pressor only",
+        "sv": "Varmvatten, endast kompr­essor",
+        "de": "Brauch­wasser, nur Ver­dichter",
+        "da": "Varmt­vand, kun kom­pressor"
+      },
+      "parameterUnit": "kWh",
+      "writable": false,
+      "minValue": 0,
+      "maxValue": 9999999,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "2721": {
+      "parameterName": {
+        "en": "Heating, com­pressor only",
+        "sv": "Värme, endast kompr­essor",
+        "de": "Heizung, nur Ver­dichter",
+        "da": "Varme, kun kom­pressor"
+      },
+      "parameterUnit": "kWh",
+      "writable": false,
+      "minValue": 0,
+      "maxValue": 9999999,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "3668": {
+      "parameterName": {
+        "en": "Heating offset climate system 4",
+        "sv": "Värme­för­skjutning klimat­system 4",
+        "de": "Ver­schieb. Heiz­kurve Klima­tisie­rungs­system 4",
+        "da": "Varme­forskyd­ning klima­anlæg 4"
+      },
+      "parameterUnit": "",
+      "writable": true,
+      "minValue": -10,
+      "maxValue": 10,
+      "enumValues": [],
+      "scaleValue": "1",
+      "type": 1
+    },
+    "3670": {
+      "parameterName": {
+        "en": "Heating offset climate system 2",
+        "sv": "Värme­för­skjutning klimat­system 2",
+        "de": "Ver­schieb. Heiz­kurve Klima­tisie­rungs­system 2",
+        "da": "Varme­forskyd­ning klima­anlæg 2"
+      },
+      "parameterUnit": "",
+      "writable": true,
+      "minValue": -10,
+      "maxValue": 10,
+      "enumValues": [],
+      "scaleValue": "1",
+      "type": 1
+    },
+    "3671": {
+      "parameterName": {
+        "en": "Heating offset climate system 1",
+        "sv": "Värme­för­skjutning klimat­system 1",
+        "de": "Ver­schieb. Heiz­kurve Klima­tisie­rungs­system 1",
+        "da": "Varme­forskyd­ning klima­anlæg 1"
+      },
+      "parameterUnit": "",
+      "writable": true,
+      "minValue": -10,
+      "maxValue": 10,
+      "enumValues": [],
+      "scaleValue": "1",
+      "type": 1
+    },
+    "3830": {
+      "parameterName": {
+        "en": "Venti­lation mode",
+        "sv": "Ventilations­läge",
+        "de": "Venti­lations­modus",
+        "da": "Ventila­tions­indstil­ling"
+      },
+      "parameterUnit": "",
+      "writable": true,
+      "minValue": 0,
+      "maxValue": 4,
+      "enumValues": [
+        {
+          "value": "0",
+          "text": "0",
+          "icon": ""
+        },
+        {
+          "value": "1",
+          "text": "1",
+          "icon": ""
+        },
+        {
+          "value": "2",
+          "text": "2",
+          "icon": ""
+        },
+        {
+          "value": "3",
+          "text": "3",
+          "icon": ""
+        },
+        {
+          "value": "4",
+          "text": "4",
+          "icon": ""
+        }
+      ],
+      "scaleValue": "1",
+      "type": 2
+    },
+    "4789": {
+      "parameterName": {
+        "en": "Activated (Smart Price Adaption)",
+        "sv": "Aktiverad (Smart Price Adaption)",
+        "de": "Aktiviert (Smart Price Adaption)",
+        "da": "Aktiveret (Smart Price Adaption)"
+      },
+      "parameterUnit": "",
+      "writable": true,
+      "minValue": 0,
+      "maxValue": 1,
+      "enumValues": [],
+      "scaleValue": "1",
+      "type": 1
+    },
+    "5033": {
+      "parameterName": {
+        "en": "Cooling offset climate system 1",
+        "sv": "Kyl­för­skjutning klimat­system 1",
+        "de": "Ver­schieb. Kühl­kurve Klima­tisie­rungs­system 1",
+        "da": "Køle­forskyd­ning klima­anlæg 1"
+      },
+      "parameterUnit": "",
+      "writable": true,
+      "minValue": -10,
+      "maxValue": 10,
+      "enumValues": [],
+      "scaleValue": "1",
+      "type": 1
+    },
+    "5927": {
+      "parameterName": {
+        "en": "Current compres­sor fre­quency",
+        "sv": "Aktuell kompressor­frekvens",
+        "de": "Aktu­elle Ver­dichter­fre­quenz",
+        "da": "Aktuel kom­pressor­fre­kvens"
+      },
+      "parameterUnit": "Hz",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "1",
+      "type": 1
+    },
+    "7086": {
+      "parameterName": {
+        "en": "More hot water",
+        "sv": "Mer varm­vatten",
+        "de": "Mehr Brauch­wasser",
+        "da": "Mere varmt­vand"
+      },
+      "parameterUnit": "",
+      "writable": true,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [
+        {
+          "value": "0",
+          "text": {
+            "en": "Off",
+            "sv": "Från",
+            "de": "Aus",
+            "da": "Fra"
+          },
+          "icon": ""
+        },
+        {
+          "value": "1",
+          "text": {
+            "en": "On",
+            "sv": "Till",
+            "de": "Ein",
+            "da": "Til"
+          },
+          "icon": ""
+        }
+      ],
+      "scaleValue": "1",
+      "type": 2
+    },
+    "8121": {
+      "parameterName": {
+        "en": "In­creased venti­lation 1",
+        "sv": "Ökad ventilation 1",
+        "de": "Erhöhte Venti­lation 1",
+        "da": "Øget venti­lation 1"
+      },
+      "parameterUnit": "",
+      "writable": true,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [
+        {
+          "value": "0",
+          "text": {
+            "en": "Off",
+            "sv": "Från",
+            "de": "Aus",
+            "da": "Fra"
+          },
+          "icon": ""
+        },
+        {
+          "value": "1",
+          "text": {
+            "en": "On",
+            "sv": "Till",
+            "de": "Ein",
+            "da": "Til"
+          },
+          "icon": ""
+        }
+      ],
+      "scaleValue": "1",
+      "type": 2
+    },
+    "10845": {
+      "parameterName": {
+        "en": "Season over­view, brine in (EB100-BT10)",
+        "sv": "Säsongs­överblick köld­bärare in (EB100-BT10)",
+        "de": "Saison­über­sicht Wärme­quellen­medium­ein­tritt (EB100-BT10)",
+        "da": "Sæson­over­blik kulde­bærer ind (EB100-BT10)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "10863": {
+      "parameterName": {
+        "en": "Season over­view, brine out (EB100-BT11)",
+        "sv": "Säsong­söverblick köld­bärare ut (EB100-BT11)",
+        "de": "Saison­über­sicht Wärme­quellen­medium­aus­tritt (EB100-BT11)",
+        "da": "Sæson­over­blik kulde­bærer ud (EB100-BT11)"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "10905": {
+      "parameterName": {
+        "en": "Pump: Heating medium (GP1)",
+        "sv": "Pump: Värme­bärare (GP1)",
+        "de": "Pumpe: Hei­zungs­medium (GP1)",
+        "da": "Pumpe: Varme­bærer (GP1)"
+      },
+      "parameterUnit": "",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [
+        {
+          "value": "0",
+          "text": {
+            "en": "Off",
+            "sv": "Från",
+            "de": "Aus",
+            "da": "Fra"
+          },
+          "icon": ""
+        },
+        {
+          "value": "1",
+          "text": {
+            "en": "On",
+            "sv": "Till",
+            "de": "Ein",
+            "da": "Til"
+          },
+          "icon": ""
+        }
+      ],
+      "scaleValue": "1",
+      "type": 2
+    },
+    "10906": {
+      "parameterName": {
+        "en": "Pump: Brine (GP2)",
+        "sv": "Pump: Köld­bärare (GP2)",
+        "de": "Pumpe: Wärme­quellen­medium (GP2)",
+        "da": "Pumpe: Kulde­bærer (GP2)"
+      },
+      "parameterUnit": "",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [
+        {
+          "value": "0",
+          "text": {
+            "en": "Off",
+            "sv": "Från",
+            "de": "Aus",
+            "da": "Fra"
+          },
+          "icon": ""
+        },
+        {
+          "value": "1",
+          "text": {
+            "en": "On",
+            "sv": "Till",
+            "de": "Ein",
+            "da": "Til"
+          },
+          "icon": ""
+        }
+      ],
+      "scaleValue": "1",
+      "type": 2
+    },
+    "12482": {
+      "parameterName": "External sensor (BT37.1)",
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "12483": {
+      "parameterName": "External sensor (BT37.2)",
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "12623": {
+      "parameterName": {
+        "en": "El. price, SEK/kWh",
+        "sv": "Elpris, SEK/kWh",
+        "de": "Strom­ta­rif, SEK/kWh",
+        "da": "Elpris, SEK/kWh"
+      },
+      "parameterUnit": "",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.01",
+      "type": 1
+    },
+    "14950": {
+      "parameterName": {
+        "en": "Oper­ating prior­ity (EB100-EP14)",
+        "sv": "Driftprioritering (EB100-EP14)",
+        "de": "Be­triebs­vor­rang (EB100-EP14)",
+        "da": "Drifts­priori­tering (EB100-EP14)"
+      },
+      "parameterUnit": "",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [
+        {
+          "value": "0",
+          "text": {
+            "en": "Off",
+            "sv": "Från",
+            "de": "Aus",
+            "da": "Fra"
+          },
+          "icon": ""
+        },
+        {
+          "value": "1",
+          "text": {
+            "en": "Heating",
+            "sv": "Värme",
+            "de": "Heizung",
+            "da": "Varme"
+          },
+          "icon": ""
+        },
+        {
+          "value": "2",
+          "text": {
+            "en": "Cooling",
+            "sv": "Kyla",
+            "de": "Kühlung",
+            "da": "Køling"
+          },
+          "icon": ""
+        },
+        {
+          "value": "3",
+          "text": {
+            "en": "Hot water",
+            "sv": "Varmvatten",
+            "de": "Brauchwasser",
+            "da": "Varmtvand"
+          },
+          "icon": ""
+        },
+        {
+          "value": "4",
+          "text": "Pool",
+          "icon": ""
+        },
+        {
+          "value": "5",
+          "text": "Pool 2",
+          "icon": ""
+        },
+        {
+          "value": "6",
+          "text": {
+            "en": "Pre­heating",
+            "sv": "För­värmer",
+            "de": "Vor­wärmung",
+            "da": "Forvarmer"
+          },
+          "icon": ""
+        }
+      ],
+      "scaleValue": "1",
+      "type": 2
+    },
+    "15753": {
+      "parameterName": {
+        "en": "Cooling, passive",
+        "sv": "Kyla, passiv",
+        "de": "Küh­lung, passiv",
+        "da": "Køling, passiv"
+      },
+      "parameterUnit": "kWh",
+      "writable": true,
+      "minValue": 0,
+      "maxValue": 9999999,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "22130": {
+      "parameterName": {
+        "en": "Instant­aneous used power",
+        "sv": "Momentan använd effekt",
+        "de": "Mo­mentan ver­wendete Leis­tung",
+        "da": "Momentan benyttet effekt"
+      },
+      "parameterUnit": "Ws",
+      "writable": false,
+      "minValue": 0,
+      "maxValue": 9999999,
+      "enumValues": [],
+      "scaleValue": "1",
+      "type": 1
+    },
+    "25154": {
+      "parameterName": {
+        "en": "Energy log - Energy produced for heat during current hour",
+        "sv": "Energilogg - Producerad energi för värme under senaste timmen"
+      },
+      "parameterUnit": "kWh",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.01",
+      "type": 1
+    },
+    "25155": {
+      "parameterName": {
+        "en": "Energy log - Energy produced for hot water during current hour",
+        "sv": "Energilogg - Producerad energi för varmvatten under senaste timmen"
+      },
+      "parameterUnit": "kWh",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.01",
+      "type": 1
+    },
+    "25157": {
+      "parameterName": {
+        "en": "Energy log - Energy produced for cooling during current hour",
+        "sv": "Energilogg - Producerad energi för kyla under senaste timmen"
+      },
+      "parameterUnit": "kWh",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.01",
+      "type": 1
+    },
+    "25158": {
+      "parameterName": {
+        "en": "Energy log - Energy used for heat during current hour",
+        "sv": "Energilogg - Förbrukad energi för värme under senaste timmen"
+      },
+      "parameterUnit": "kWh",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.01",
+      "type": 1
+    },
+    "25159": {
+      "parameterName": {
+        "en": "Energy log - Energy used for hot water during current hour",
+        "sv": "Energilogg - Förbrukad energi för varmvatten under senaste timmen"
+      },
+      "parameterUnit": "kWh",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.01",
+      "type": 1
+    },
+    "25161": {
+      "parameterName": {
+        "en": "Energy log - Energy used for cooling during current hour",
+        "sv": "Energilogg - Förbrukad energi för kyla under senaste timmen"
+      },
+      "parameterUnit": "kWh",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.01",
+      "type": 1
+    },
+    "25162": {
+      "parameterName": {
+        "en": "Energy log - Energy used by additional heater for heat during current hour",
+        "sv": "Energilogg - Förbrukad energi av tillsatsvärmaren för värme under senaste timmen"
+      },
+      "parameterUnit": "kWh",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.01",
+      "type": 1
+    },
+    "25163": {
+      "parameterName": {
+        "en": "Energy log - Energy used by additional heater for hot water during current hour",
+        "sv": "Energilogg - Förbrukad energi av tillsatsvärmaren för varmvatten under senaste timmen"
+      },
+      "parameterUnit": "kWh",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.01",
+      "type": 1
+    },
+    "25919": {
+      "parameterName": "External sensor (BT37.3)",
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "25920": {
+      "parameterName": "External sensor (BT37.4)",
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "25921": {
+      "parameterName": "External sensor (BT37.5)",
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "25922": {
+      "parameterName": "External sensor (BT37.6)",
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "47750": {
+      "parameterName": "Rm sens set point val: Climate system 1",
+      "parameterUnit": "°C",
+      "writable": true,
+      "minValue": 50,
+      "maxValue": 300,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "47751": {
+      "parameterName": "Rm sens set point val: Climate system 2",
+      "parameterUnit": "°C",
+      "writable": true,
+      "minValue": 50,
+      "maxValue": 300,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "47752": {
+      "parameterName": "Rm sens set point val: Climate system 4",
+      "parameterUnit": "°C",
+      "writable": true,
+      "minValue": 50,
+      "maxValue": 300,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "48350": {
+      "parameterName": "Temp­erature: Climate system 1",
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "48351": {
+      "parameterName": "Temp­erature: Climate system 2",
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "48352": {
+      "parameterName": "Temp­erature: Climate system 4",
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "50672": {
+      "parameterName": "Temp­erature: BT50",
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "50673": {
+      "parameterName": "Temp­erature: BT50 ECS 2",
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "50674": {
+      "parameterName": "Temp­erature: BT50 ECS 4",
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "type": 1
+    },
+    "55000": {
+      "parameterName": {
+        "en": "Priority",
+        "sv": "Prio",
+        "de": "Prio",
+        "da": "Prio"
+      },
+      "parameterUnit": "",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [
+        {
+          "value": "10",
+          "text": {
+            "en": "Off",
+            "sv": "Från",
+            "de": "Aus",
+            "da": "Fra"
+          },
+          "icon": ""
+        },
+        {
+          "value": "20",
+          "text": {
+            "en": "Hot water",
+            "sv": "Varmvatten",
+            "de": "Brauchwasser",
+            "da": "Varmtvand"
+          },
+          "icon": ""
+        },
+        {
+          "value": "25",
+          "text": {
+            "en": "Ext. hot water",
+            "sv": "Ext. varmvatten"
+          },
+          "icon": ""
+        },
+        {
+          "value": "30",
+          "text": {
+            "en": "Heating",
+            "sv": "Värme",
+            "de": "Heizung",
+            "da": "Varme"
+          },
+          "icon": ""
+        },
+        {
+          "value": "40",
+          "text": "Pool",
+          "icon": ""
+        },
+        {
+          "value": "41",
+          "text": "Pool 2",
+          "icon": ""
+        },
+        {
+          "value": "50",
+          "text": "Transfer",
+          "icon": ""
+        },
+        {
+          "value": "60",
+          "text": {
+            "en": "Cooling",
+            "sv": "Kyla",
+            "de": "Kühlung",
+            "da": "Køling"
+          },
+          "icon": ""
+        }
+      ],
+      "scaleValue": "1",
+      "type": 2
+    },
+    "55027": {
+      "parameterName": {
+        "en": "Int elec add heat",
+        "sv": "Intern eltillsats",
+        "de": "Interne elektrische Zusatzheizung",
+        "da": "Internt el-til­skud"
+      },
+      "parameterUnit": "",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [
+        {
+          "value": "0",
+          "text": {
+            "en": "Alarm",
+            "sv": "Larm"
+          },
+          "icon": ""
+        },
+        {
+          "value": "1",
+          "text": {
+            "en": "Alarm",
+            "sv": "Larm"
+          },
+          "icon": ""
+        },
+        {
+          "value": "2",
+          "text": {
+            "en": "Active",
+            "sv": "Aktiv",
+            "de": "Aktiv",
+            "da": "Aktiv"
+          },
+          "icon": ""
+        },
+        {
+          "value": "3",
+          "text": {
+            "en": "Off",
+            "sv": "Från",
+            "de": "Aus",
+            "da": "Fra"
+          },
+          "icon": ""
+        },
+        {
+          "value": "4",
+          "text": {
+            "en": "Blocked",
+            "sv": "Blockerad",
+            "de": "Blockiert",
+            "da": "Blokeret"
+          },
+          "icon": ""
+        },
+        {
+          "value": "5",
+          "text": {
+            "en": "Off",
+            "sv": "Från",
+            "de": "Aus",
+            "da": "Fra"
+          },
+          "icon": ""
+        },
+        {
+          "value": "6",
+          "text": {
+            "en": "Active",
+            "sv": "Aktiv",
+            "de": "Aktiv",
+            "da": "Aktiv"
+          },
+          "icon": ""
+        }
+      ],
+      "scaleValue": "1",
+      "type": 2
+    }
+  }
+}

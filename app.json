@@ -2,7 +2,7 @@
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.myuplink",
   "permissions": [],
-  "version": "1.0.11",
+  "version": "1.1.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "source": "https://github.com/myUplink/homey-myuplink",
@@ -95,7 +95,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=generic|Connected200|Connected300|ConnectedRetrofit|Connected200Express|NibeS1255"
+            "filter": "driver_id=generic|hoiax|nibe"
           },
           {
             "type": "autocomplete",
@@ -162,7 +162,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=generic|Connected200|Connected300|ConnectedRetrofit|Connected200Express|NibeS1255"
+            "filter": "driver_id=generic|hoiax|nibe"
           },
           {
             "type": "autocomplete",
@@ -246,7 +246,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=generic|Connected200|Connected300|ConnectedRetrofit|Connected200Express|NibeS1255"
+            "filter": "driver_id=generic|hoiax|nibe"
           },
           {
             "type": "autocomplete",
@@ -297,7 +297,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=generic|Connected200|Connected300|ConnectedRetrofit|Connected200Express|NibeS1255"
+            "filter": "driver_id=generic|hoiax|nibe"
           },
           {
             "type": "autocomplete",
@@ -337,25 +337,258 @@
       "connectivity": [
         "cloud"
       ],
-      "repair": [
-        {
-          "id": "login_oauth2",
-          "template": "login_oauth2"
-        }
-      ],
       "images": {
-        "small": "/drivers/Connected200/assets/images/small.png",
-        "large": "/drivers/Connected200/assets/images/large.png",
-        "xlarge": "/drivers/Connected200/assets/images/xlarge.png"
+        "small": "/drivers/generic/assets/images/small.png",
+        "large": "/drivers/generic/assets/images/large.png",
+        "xlarge": "/drivers/generic/assets/images/xlarge.png"
       },
+      "id": "generic",
+      "name": {
+        "en": "Experimental Device",
+        "no": "Eksperimentell Enhet"
+      },
+      "class": "heater",
+      "capabilities": [],
+      "capabilitiesOptions": {},
       "pair": [
         {
           "id": "login_oauth2",
-          "template": "login_oauth2"
+          "template": "login_oauth2",
+          "navigation": {
+            "next": "generic_info"
+          }
+        },
+        {
+          "id": "generic_info",
+          "navigation": {
+            "next": "list_devices"
+          }
         },
         {
           "id": "list_devices",
           "template": "list_devices",
+          "options": {
+            "singular": true
+          },
+          "navigation": {
+            "next": "configure_device"
+          }
+        },
+        {
+          "id": "configure_device",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_onoff"
+        },
+        {
+          "id": "add_thermostat"
+        },
+        {
+          "id": "add_tempsensor"
+        },
+        {
+          "id": "add_powersensor"
+        },
+        {
+          "id": "add_powermeter"
+        },
+        {
+          "id": "add_alarm"
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login_oauth2",
+          "template": "login_oauth2",
+          "navigation": {
+            "next": "prepare_device"
+          }
+        },
+        {
+          "id": "prepare_device"
+        },
+        {
+          "id": "configure_device",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_onoff"
+        },
+        {
+          "id": "add_thermostat"
+        },
+        {
+          "id": "add_tempsensor"
+        },
+        {
+          "id": "add_powersensor"
+        },
+        {
+          "id": "add_powermeter"
+        },
+        {
+          "id": "add_alarm"
+        },
+        {
+          "id": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Settings",
+            "no": "Innstillinger"
+          },
+          "children": []
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Status",
+            "no": "Status"
+          },
+          "children": []
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "System",
+            "no": "System"
+          },
+          "children": [
+            {
+              "id": "firmwareVersion",
+              "type": "label",
+              "label": {
+                "en": "Firmware Version",
+                "no": "Fastvareversjon"
+              },
+              "value": "???",
+              "hint": {
+                "en": "The Firmware version of the device.",
+                "no": "Fastvareversjonen til enheten."
+              }
+            },
+            {
+              "id": "updateRate",
+              "type": "number",
+              "label": {
+                "en": "Refresh rate for capabilities",
+                "no": "Oppdateringsfrekvens for egenskaper"
+              },
+              "hint": {
+                "en": "Number of seconds between every refresh of the capabilities.",
+                "no": "Antall sekunder mellom hver oppdatering av enhetens egenskaper."
+              },
+              "value": 300,
+              "min": 5,
+              "max": 600,
+              "units": {
+                "en": "s"
+              }
+            },
+            {
+              "id": "updateRateSettings",
+              "type": "number",
+              "label": {
+                "en": "Refresh rate for settings",
+                "no": "Oppdateringsfrekvens for innstillinger"
+              },
+              "hint": {
+                "en": "Number of seconds between every refresh of the settings.",
+                "no": "Antall sekunder mellom hver oppdatering av innstillingene."
+              },
+              "value": 300,
+              "min": 60,
+              "max": 1800,
+              "units": {
+                "en": "s"
+              }
+            },
+            {
+              "id": "updateRateCache",
+              "type": "number",
+              "label": {
+                "en": "Refresh rate for flows",
+                "no": "Oppdateringsfrekvens for flytkort"
+              },
+              "hint": {
+                "en": "Number of seconds between every refresh of flow cards.",
+                "no": "Antall sekunder mellom hver oppdatering av flytkort."
+              },
+              "value": 300,
+              "min": 5,
+              "max": 600,
+              "units": {
+                "en": "s"
+              }
+            },
+            {
+              "id": "updateRateErr",
+              "type": "number",
+              "label": {
+                "en": "Waiting time after errors",
+                "no": "Ventetid ved feil"
+              },
+              "hint": {
+                "en": "Number of seconds to wait before retrying after a communication error with myUplink.",
+                "no": "Antall sekunder å vente før neste forsøk etter en kommunikasjonsfeil mot myUplink."
+              },
+              "value": 300,
+              "min": 60,
+              "max": 1800,
+              "units": {
+                "en": "s"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "images": {
+        "small": "/drivers/hoiax/assets/images/small.png",
+        "large": "/drivers/hoiax/assets/images/large.png",
+        "xlarge": "/drivers/hoiax/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "login_oauth2",
+          "template": "login_oauth2",
+          "navigation": {
+            "next": "loading"
+          }
+        },
+        {
+          "id": "loading",
+          "template": "loading",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "options": {
+            "singular": true
+          },
           "navigation": {
             "next": "add_devices"
           }
@@ -365,25 +598,18 @@
           "template": "add_devices"
         }
       ],
-      "id": "Connected200",
+      "repair": [
+        {
+          "id": "login_oauth2",
+          "template": "login_oauth2"
+        }
+      ],
+      "id": "hoiax",
       "name": {
-        "en": "Connected 200"
+        "en": "Høiax"
       },
       "class": "heater",
-      "capabilities": [
-        "max_power_2000",
-        "measure_humidity.fill_level",
-        "measure_humidity.leak_relation",
-        "measure_power",
-        "measure_power.leak",
-        "measure_temperature",
-        "meter_power",
-        "meter_power.in_tank",
-        "meter_power.leak_accum",
-        "onoff",
-        "onoff.hwBoost",
-        "target_temperature"
-      ],
+      "capabilities": [],
       "capabilitiesOptions": {
         "measure_humidity.fill_level": {
           "title": {
@@ -562,6 +788,71 @@
               }
             },
             {
+              "id": "setting_500",
+              "type": "dropdown",
+              "value": "",
+              "values": [
+                {
+                  "id": "3",
+                  "label": {
+                    "en": "Eco",
+                    "no": "Økonomi"
+                  }
+                },
+                {
+                  "id": "4",
+                  "label": {
+                    "en": "Normal",
+                    "no": "Normal styring"
+                  }
+                },
+                {
+                  "id": "5",
+                  "label": {
+                    "en": "Express (*)",
+                    "no": "Ekspress (*)"
+                  }
+                },
+                {
+                  "id": "6",
+                  "label": {
+                    "en": "Price",
+                    "no": "Spotpris"
+                  }
+                },
+                {
+                  "id": "7",
+                  "label": {
+                    "en": "Schedule",
+                    "no": "Timeplan"
+                  }
+                },
+                {
+                  "id": "8",
+                  "label": {
+                    "en": "External",
+                    "no": "Ekstern styring"
+                  }
+                },
+                {
+                  "id": "10",
+                  "label": {
+                    "en": "Vacation",
+                    "no": "Ferie"
+                  }
+                },
+                {
+                  "id": "11",
+                  "label": "Boost"
+                }
+              ],
+              "label": "Program",
+              "hint": {
+                "en": "Values marked with (*) are not available on all devices. Consult your manual before use or result may be undefined.",
+                "no": "Verdier markert med (*) er ikke tilgjengelige for alle enheter. Se i brukermanualen før denne verdien settes ellers kan resultatet bli udefinert."
+              }
+            },
+            {
               "id": "setting_511",
               "type": "number",
               "value": 0,
@@ -611,63 +902,6 @@
                 "en": "Number of cheap hours",
                 "no": "Antall billige timer per døgn"
               },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_500",
-              "type": "dropdown",
-              "value": "",
-              "values": [
-                {
-                  "id": "3",
-                  "label": {
-                    "en": "Eco",
-                    "no": "Økonomi"
-                  }
-                },
-                {
-                  "id": "4",
-                  "label": {
-                    "en": "Normal",
-                    "no": "Normal styring"
-                  }
-                },
-                {
-                  "id": "6",
-                  "label": {
-                    "en": "Price",
-                    "no": "Spotpris"
-                  }
-                },
-                {
-                  "id": "7",
-                  "label": {
-                    "en": "Schedule",
-                    "no": "Timeplan"
-                  }
-                },
-                {
-                  "id": "8",
-                  "label": {
-                    "en": "External",
-                    "no": "Ekstern styring"
-                  }
-                },
-                {
-                  "id": "10",
-                  "label": {
-                    "en": "Vacation",
-                    "no": "Ferie"
-                  }
-                },
-                {
-                  "id": "11",
-                  "label": "Boost"
-                }
-              ],
-              "label": "Program",
               "hint": {
                 "en": ""
               }
@@ -920,48 +1154,12 @@
               }
             },
             {
-              "id": "status_523",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Support multiple power settings",
-                "no": "Støtter regulering av effekt"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
               "id": "status_406",
               "type": "label",
               "value": "",
               "label": {
                 "en": "Current program",
                 "no": "Gjeldende program"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_505",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Element 2 status",
-                "no": "Element trinn 2 status"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_506",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Element 1 status",
-                "no": "Element trinn 1 status"
               },
               "hint": {
                 "en": ""
@@ -986,30 +1184,6 @@
               "label": {
                 "en": "Current program timeout",
                 "no": "Program endres om"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_507",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Element 2 time on",
-                "no": "Element trinn 2 tid på"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_508",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Element 1 time on",
-                "no": "Element trinn 1 tid på"
               },
               "hint": {
                 "en": ""
@@ -1058,30 +1232,6 @@
               "label": {
                 "en": "Tank volume",
                 "no": "Tank volum"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_503",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Element 2 power",
-                "no": "Element trinn 2 effekt"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_504",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Element 1 power",
-                "no": "Element trinn 1 effekt"
               },
               "hint": {
                 "en": ""
@@ -1152,2106 +1302,14 @@
         {
           "type": "group",
           "label": {
-            "en": "System",
-            "no": "System"
+            "en": "Settings for Retrofit devices",
+            "no": "Innstillinger for Retrofit enheter"
           },
           "children": [
-            {
-              "id": "firmwareVersion",
-              "type": "label",
-              "label": {
-                "en": "Firmware Version",
-                "no": "Fastvareversjon"
-              },
-              "value": "???",
-              "hint": {
-                "en": "The Firmware version of the tank.",
-                "no": "Fastvareversjonen til tanken."
-              }
-            },
-            {
-              "id": "updateRate",
-              "type": "number",
-              "label": {
-                "en": "Refresh rate for capabilities",
-                "no": "Oppdateringsfrekvens for egenskaper"
-              },
-              "hint": {
-                "en": "Number of seconds between every refresh of the capabilities.",
-                "no": "Antall sekunder mellom hver oppdatering av enhetens egenskaper."
-              },
-              "value": 300,
-              "min": 5,
-              "max": 600,
-              "units": {
-                "en": "s"
-              }
-            },
-            {
-              "id": "updateRateSettings",
-              "type": "number",
-              "label": {
-                "en": "Refresh rate for settings",
-                "no": "Oppdateringsfrekvens for innstillinger"
-              },
-              "hint": {
-                "en": "Number of seconds between every refresh of the settings.",
-                "no": "Antall sekunder mellom hver oppdatering av innstillingene."
-              },
-              "value": 300,
-              "min": 60,
-              "max": 1800,
-              "units": {
-                "en": "s"
-              }
-            },
-            {
-              "id": "updateRateErr",
-              "type": "number",
-              "label": {
-                "en": "Waiting time after errors",
-                "no": "Ventetid ved feil"
-              },
-              "hint": {
-                "en": "Number of seconds to wait before retrying after a communication error with myUplink.",
-                "no": "Antall sekunder å vente før neste forsøk etter en kommunikasjonsfeil mot myUplink."
-              },
-              "value": 300,
-              "min": 60,
-              "max": 1800,
-              "units": {
-                "en": "s"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "platforms": [
-        "local",
-        "cloud"
-      ],
-      "connectivity": [
-        "cloud"
-      ],
-      "repair": [
-        {
-          "id": "login_oauth2",
-          "template": "login_oauth2"
-        }
-      ],
-      "images": {
-        "small": "/drivers/Connected200Express/assets/images/small.png",
-        "large": "/drivers/Connected200Express/assets/images/large.png",
-        "xlarge": "/drivers/Connected200Express/assets/images/xlarge.png"
-      },
-      "pair": [
-        {
-          "id": "login_oauth2",
-          "template": "login_oauth2"
-        },
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_devices"
-          }
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices"
-        }
-      ],
-      "id": "Connected200Express",
-      "name": {
-        "en": "Connected 200 Express"
-      },
-      "class": "heater",
-      "capabilities": [
-        "measure_humidity.fill_level",
-        "measure_humidity.leak_relation",
-        "measure_power",
-        "measure_power.leak",
-        "measure_temperature",
-        "measure_temperature.top",
-        "meter_power",
-        "meter_power.in_tank",
-        "meter_power.leak_accum",
-        "onoff",
-        "onoff.hwBoost",
-        "target_temperature"
-      ],
-      "capabilitiesOptions": {
-        "measure_humidity.fill_level": {
-          "title": {
-            "en": "Fill level",
-            "no": "Fyllingsgrad"
-          },
-          "units": "%"
-        },
-        "measure_humidity.leak_relation": {
-          "title": {
-            "en": "Energy leaked yesterday",
-            "no": "Andel strømbruk tapt i går"
-          }
-        },
-        "measure_power": {
-          "title": {
-            "en": "Estimated power",
-            "no": "Antatt effekt"
-          },
-          "units": "W"
-        },
-        "measure_power.leak": {
-          "title": {
-            "en": "Passive heat leakage",
-            "no": "Passivt varmetap"
-          }
-        },
-        "measure_temperature": {
-          "title": {
-            "en": "Temperature",
-            "no": "Temperatur"
-          },
-          "units": "°C"
-        },
-        "measure_temperature.top": {
-          "title": {
-            "en": "Top temperature",
-            "no": "Øvre temperatur"
-          },
-          "units": "°C"
-        },
-        "meter_power": {
-          "title": {
-            "en": "Total energy used",
-            "no": "Energi brukt totalt"
-          },
-          "units": "kWh"
-        },
-        "meter_power.in_tank": {
-          "title": {
-            "en": "Stored energy",
-            "no": "Energi i tanken"
-          },
-          "units": "kWh"
-        },
-        "meter_power.leak_accum": {
-          "title": {
-            "en": "Total heat leakage",
-            "no": "Akkumulert varmetap"
-          }
-        },
-        "onoff.hwBoost": {
-          "title": {
-            "en": "Boost active",
-            "no": "Boost funksjon aktiv"
-          },
-          "insightsTitleTrue": {
-            "en": "Boost Turned On",
-            "no": "Boost Slått på"
-          },
-          "insightsTitleFalse": {
-            "en": "Boost Turned Off",
-            "no": "Boost Slått av"
-          }
-        },
-        "target_temperature": {
-          "title": {
-            "en": "Setpoint",
-            "no": "Ønsket temperatur"
-          },
-          "step": 1,
-          "min": 20,
-          "max": 85,
-          "units": "°C"
-        }
-      },
-      "settings": [
-        {
-          "type": "group",
-          "label": {
-            "en": "Settings",
-            "no": "Innstillinger"
-          },
-          "children": [
-            {
-              "id": "setting_301",
-              "type": "number",
-              "value": 0,
-              "min": 4,
-              "max": 35,
-              "step": 1,
-              "units": {
-                "en": "day"
-              },
-              "label": {
-                "en": "Default vacation duration",
-                "no": "Standard varighet for feriemodus"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_512",
-              "type": "number",
-              "value": 0,
-              "min": 5,
-              "max": 40,
-              "step": 1,
-              "units": {
-                "en": "l/m"
-              },
-              "label": {
-                "en": "Max water flow",
-                "no": "Maksimalt vanntrykk ved bruk"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_201",
-              "type": "number",
-              "value": 0,
-              "min": 1,
-              "max": 99,
-              "step": 1,
-              "units": {
-                "en": "hour"
-              },
-              "label": {
-                "en": "Default boost duration",
-                "no": "Standard varighet for boost"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_307",
-              "type": "number",
-              "value": 0,
-              "min": 0.1,
-              "max": 15,
-              "step": 0.1,
-              "units": {
-                "en": "%"
-              },
-              "label": {
-                "en": "Power diff",
-                "no": "Avvik fra nominell effekt"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_546",
-              "type": "number",
-              "value": 0,
-              "min": 20,
-              "max": 100,
-              "step": 1,
-              "units": {
-                "en": "%"
-              },
-              "label": {
-                "en": "Minimum remaining heat in expensive hours",
-                "no": "Minimum restvarme i dyre timer"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_511",
-              "type": "number",
-              "value": 0,
-              "min": 2,
-              "max": 8,
-              "step": 1,
-              "units": {
-                "en": "week"
-              },
-              "label": {
-                "en": "Time between legionella preventions",
-                "no": "Legionella program frekvens"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_545",
-              "type": "number",
-              "value": 0,
-              "min": 0,
-              "max": 18,
-              "step": 1,
-              "units": {
-                "en": ""
-              },
-              "label": {
-                "en": "Number of expensive hours",
-                "no": "Antall dyre timer per døgn"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_547",
-              "type": "number",
-              "value": 0,
-              "min": 0,
-              "max": 12,
-              "step": 1,
-              "units": {
-                "en": ""
-              },
-              "label": {
-                "en": "Number of cheap hours",
-                "no": "Antall billige timer per døgn"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_500",
-              "type": "dropdown",
-              "value": "",
-              "values": [
-                {
-                  "id": "3",
-                  "label": {
-                    "en": "Eco",
-                    "no": "Økonomi"
-                  }
-                },
-                {
-                  "id": "4",
-                  "label": {
-                    "en": "Normal",
-                    "no": "Normal styring"
-                  }
-                },
-                {
-                  "id": "5",
-                  "label": {
-                    "en": "Express",
-                    "no": "Ekspress"
-                  }
-                },
-                {
-                  "id": "6",
-                  "label": {
-                    "en": "Price",
-                    "no": "Spotpris"
-                  }
-                },
-                {
-                  "id": "7",
-                  "label": {
-                    "en": "Schedule",
-                    "no": "Timeplan"
-                  }
-                },
-                {
-                  "id": "8",
-                  "label": {
-                    "en": "External",
-                    "no": "Ekstern styring"
-                  }
-                },
-                {
-                  "id": "10",
-                  "label": {
-                    "en": "Vacation",
-                    "no": "Ferie"
-                  }
-                },
-                {
-                  "id": "11",
-                  "label": "Boost"
-                }
-              ],
-              "label": "Program",
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_544",
-              "type": "dropdown",
-              "value": "",
-              "values": [
-                {
-                  "id": "1",
-                  "label": {
-                    "en": "NO1",
-                    "no": "NO1 Øst"
-                  }
-                },
-                {
-                  "id": "2",
-                  "label": {
-                    "en": "NO2",
-                    "no": "NO2 Sør"
-                  }
-                },
-                {
-                  "id": "3",
-                  "label": {
-                    "en": "NO3",
-                    "no": "NO3 Midt"
-                  }
-                },
-                {
-                  "id": "4",
-                  "label": {
-                    "en": "NO4",
-                    "no": "NO4 Nord"
-                  }
-                },
-                {
-                  "id": "5",
-                  "label": {
-                    "en": "NO5",
-                    "no": "NO5 Vest"
-                  }
-                }
-              ],
-              "label": {
-                "en": "Nordpool price region",
-                "no": "Prisregion for strømpriser"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_601",
-              "type": "dropdown",
-              "value": "",
-              "values": [
-                {
-                  "id": "1",
-                  "label": "heat"
-                }
-              ],
-              "label": "Zone mode",
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_100",
-              "type": "number",
-              "value": 0,
-              "min": 10,
-              "max": 35,
-              "step": 0.01,
-              "units": {
-                "en": "°C"
-              },
-              "label": {
-                "en": "Expected ambient temperature",
-                "no": "Antatt romtemperatur"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_101",
-              "type": "number",
-              "value": 0,
-              "min": 4,
-              "max": 20,
-              "step": 0.01,
-              "units": {
-                "en": "°C"
-              },
-              "label": {
-                "en": "Expected inlet water temperature",
-                "no": "Antatt temperatur på vann inn"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_200",
-              "type": "number",
-              "value": 0,
-              "min": 60,
-              "max": 85,
-              "step": 0.01,
-              "units": {
-                "en": "°C"
-              },
-              "label": {
-                "en": "Default boost setpoint",
-                "no": "Ønsket temperatur for boost"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_300",
-              "type": "number",
-              "value": 0,
-              "min": 35,
-              "max": 65,
-              "step": 0.01,
-              "units": {
-                "en": "°C"
-              },
-              "label": {
-                "en": "Default vacation setpoint",
-                "no": "Ønsket temperatur for feriemodus"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_516",
-              "type": "number",
-              "value": 0,
-              "min": 3,
-              "max": 10,
-              "step": 0.01,
-              "units": {
-                "en": "°C"
-              },
-              "label": {
-                "en": "Hysteresis",
-                "no": "Hysterese"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_548",
-              "type": "number",
-              "value": 0,
-              "min": 0,
-              "max": 20,
-              "step": 0.01,
-              "units": {
-                "en": "°C"
-              },
-              "label": {
-                "en": "Setpoint increase in cheap hours",
-                "no": "Temperaturøkning i billige timer"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_304",
-              "type": "number",
-              "value": 0,
-              "min": 0,
-              "max": 60,
-              "step": 1,
-              "units": {
-                "en": "min"
-              },
-              "label": {
-                "en": "Time before display dim",
-                "no": "Tid før display dimmes ned"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_305",
-              "type": "number",
-              "value": 0,
-              "min": 0,
-              "max": 240,
-              "step": 1,
-              "units": {
-                "en": "min"
-              },
-              "label": {
-                "en": "Time before display is turned off",
-                "no": "Tid før display slås av"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_308",
-              "type": "number",
-              "value": 0,
-              "min": -720,
-              "max": 720,
-              "step": 1,
-              "units": {
-                "en": "min"
-              },
-              "label": {
-                "en": "Timezone offset",
-                "no": "Tidssone"
-              },
-              "hint": {
-                "en": ""
-              }
-            }
-          ]
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "Status",
-            "no": "Status"
-          },
-          "children": [
-            {
-              "id": "status_518",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Serial number",
-                "no": "Serienummer"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_522",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Support express program",
-                "no": "Støtter ekspress"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_406",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Current program",
-                "no": "Gjeldende program"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_537",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Bottom element status",
-                "no": "Status nedre element"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_538",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Top element status",
-                "no": "Status øvre element"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_549",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Current price type",
-                "no": "Gjeldende pristype"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_501",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Current program timeout",
-                "no": "Program endres om"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_509",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Time since last legionella prevention",
-                "no": "Tid siden siste legionellahemmende temperatur"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_514",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Next legionella prevention",
-                "no": "Neste legionella program"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_531",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Total runtime",
-                "no": "Total tid i drift"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_539",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Bottom element time on",
-                "no": "Nedre element tid på"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_540",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Top element time on",
-                "no": "Øvre element tid på"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_526",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Tank volume",
-                "no": "Tank volum"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_535",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Bottom element power",
-                "no": "Nedre element effekt"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_536",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Top element power",
-                "no": "Øvre element effekt"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_102",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Default eco setpoint",
-                "no": "Standard temperaturinstilling"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_551",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Current target temperature",
-                "no": "Gjeldende styringstemperatur"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_532",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Uptime",
-                "no": "Tid siden siste omstart"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_533",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Uptime (com)",
-                "no": "Tid siden siste omstart (WiFi)"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_534",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Uptime (connection)",
-                "no": "Tid siden siste tilkobling (MQTT)"
-              },
-              "hint": {
-                "en": ""
-              }
-            }
-          ]
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "System",
-            "no": "System"
-          },
-          "children": [
-            {
-              "id": "firmwareVersion",
-              "type": "label",
-              "label": {
-                "en": "Firmware Version",
-                "no": "Fastvareversjon"
-              },
-              "value": "???",
-              "hint": {
-                "en": "The Firmware version of the tank.",
-                "no": "Fastvareversjonen til tanken."
-              }
-            },
-            {
-              "id": "updateRate",
-              "type": "number",
-              "label": {
-                "en": "Refresh rate for capabilities",
-                "no": "Oppdateringsfrekvens for egenskaper"
-              },
-              "hint": {
-                "en": "Number of seconds between every refresh of the capabilities.",
-                "no": "Antall sekunder mellom hver oppdatering av enhetens egenskaper."
-              },
-              "value": 300,
-              "min": 5,
-              "max": 600,
-              "units": {
-                "en": "s"
-              }
-            },
-            {
-              "id": "updateRateSettings",
-              "type": "number",
-              "label": {
-                "en": "Refresh rate for settings",
-                "no": "Oppdateringsfrekvens for innstillinger"
-              },
-              "hint": {
-                "en": "Number of seconds between every refresh of the settings.",
-                "no": "Antall sekunder mellom hver oppdatering av innstillingene."
-              },
-              "value": 300,
-              "min": 60,
-              "max": 1800,
-              "units": {
-                "en": "s"
-              }
-            },
-            {
-              "id": "updateRateErr",
-              "type": "number",
-              "label": {
-                "en": "Waiting time after errors",
-                "no": "Ventetid ved feil"
-              },
-              "hint": {
-                "en": "Number of seconds to wait before retrying after a communication error with myUplink.",
-                "no": "Antall sekunder å vente før neste forsøk etter en kommunikasjonsfeil mot myUplink."
-              },
-              "value": 300,
-              "min": 60,
-              "max": 1800,
-              "units": {
-                "en": "s"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "platforms": [
-        "local",
-        "cloud"
-      ],
-      "connectivity": [
-        "cloud"
-      ],
-      "repair": [
-        {
-          "id": "login_oauth2",
-          "template": "login_oauth2"
-        }
-      ],
-      "images": {
-        "small": "/drivers/Connected300/assets/images/small.png",
-        "large": "/drivers/Connected300/assets/images/large.png",
-        "xlarge": "/drivers/Connected300/assets/images/xlarge.png"
-      },
-      "pair": [
-        {
-          "id": "login_oauth2",
-          "template": "login_oauth2"
-        },
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_devices"
-          }
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices"
-        }
-      ],
-      "id": "Connected300",
-      "name": {
-        "en": "Connected 300"
-      },
-      "class": "heater",
-      "capabilities": [
-        "max_power_3000",
-        "measure_humidity.fill_level",
-        "measure_humidity.leak_relation",
-        "measure_power",
-        "measure_power.leak",
-        "measure_temperature",
-        "meter_power",
-        "meter_power.in_tank",
-        "meter_power.leak_accum",
-        "onoff",
-        "onoff.hwBoost",
-        "target_temperature"
-      ],
-      "capabilitiesOptions": {
-        "measure_humidity.fill_level": {
-          "title": {
-            "en": "Fill level",
-            "no": "Fyllingsgrad"
-          },
-          "units": "%"
-        },
-        "measure_humidity.leak_relation": {
-          "title": {
-            "en": "Energy leaked yesterday",
-            "no": "Andel strømbruk tapt i går"
-          }
-        },
-        "measure_power": {
-          "title": {
-            "en": "Estimated power",
-            "no": "Antatt effekt"
-          },
-          "units": "W"
-        },
-        "measure_power.leak": {
-          "title": {
-            "en": "Passive heat leakage",
-            "no": "Passivt varmetap"
-          }
-        },
-        "measure_temperature": {
-          "title": {
-            "en": "Temperature",
-            "no": "Temperatur"
-          },
-          "units": "°C"
-        },
-        "meter_power": {
-          "title": {
-            "en": "Total energy used",
-            "no": "Energi brukt totalt"
-          },
-          "units": "kWh"
-        },
-        "meter_power.in_tank": {
-          "title": {
-            "en": "Stored energy",
-            "no": "Energi i tanken"
-          },
-          "units": "kWh"
-        },
-        "meter_power.leak_accum": {
-          "title": {
-            "en": "Total heat leakage",
-            "no": "Akkumulert varmetap"
-          }
-        },
-        "onoff.hwBoost": {
-          "title": {
-            "en": "Boost active",
-            "no": "Boost funksjon aktiv"
-          },
-          "insightsTitleTrue": {
-            "en": "Boost Turned On",
-            "no": "Boost Slått på"
-          },
-          "insightsTitleFalse": {
-            "en": "Boost Turned Off",
-            "no": "Boost Slått av"
-          }
-        },
-        "target_temperature": {
-          "title": {
-            "en": "Setpoint",
-            "no": "Ønsket temperatur"
-          },
-          "step": 1,
-          "min": 20,
-          "max": 85,
-          "units": "°C"
-        }
-      },
-      "settings": [
-        {
-          "type": "group",
-          "label": {
-            "en": "Settings",
-            "no": "Innstillinger"
-          },
-          "children": [
-            {
-              "id": "setting_301",
-              "type": "number",
-              "value": 0,
-              "min": 4,
-              "max": 35,
-              "step": 1,
-              "units": {
-                "en": "day"
-              },
-              "label": {
-                "en": "Default vacation duration",
-                "no": "Standard varighet for feriemodus"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_512",
-              "type": "number",
-              "value": 0,
-              "min": 5,
-              "max": 40,
-              "step": 1,
-              "units": {
-                "en": "l/m"
-              },
-              "label": {
-                "en": "Max water flow",
-                "no": "Maksimalt vanntrykk ved bruk"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_201",
-              "type": "number",
-              "value": 0,
-              "min": 1,
-              "max": 99,
-              "step": 1,
-              "units": {
-                "en": "hour"
-              },
-              "label": {
-                "en": "Default boost duration",
-                "no": "Standard varighet for boost"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_307",
-              "type": "number",
-              "value": 0,
-              "min": 0.1,
-              "max": 15,
-              "step": 0.1,
-              "units": {
-                "en": "%"
-              },
-              "label": {
-                "en": "Power diff",
-                "no": "Avvik fra nominell effekt"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_546",
-              "type": "number",
-              "value": 0,
-              "min": 20,
-              "max": 100,
-              "step": 1,
-              "units": {
-                "en": "%"
-              },
-              "label": {
-                "en": "Minimum remaining heat in expensive hours",
-                "no": "Minimum restvarme i dyre timer"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_511",
-              "type": "number",
-              "value": 0,
-              "min": 2,
-              "max": 8,
-              "step": 1,
-              "units": {
-                "en": "week"
-              },
-              "label": {
-                "en": "Time between legionella preventions",
-                "no": "Legionella program frekvens"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_545",
-              "type": "number",
-              "value": 0,
-              "min": 0,
-              "max": 18,
-              "step": 1,
-              "units": {
-                "en": ""
-              },
-              "label": {
-                "en": "Number of expensive hours",
-                "no": "Antall dyre timer per døgn"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_547",
-              "type": "number",
-              "value": 0,
-              "min": 0,
-              "max": 12,
-              "step": 1,
-              "units": {
-                "en": ""
-              },
-              "label": {
-                "en": "Number of cheap hours",
-                "no": "Antall billige timer per døgn"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_500",
-              "type": "dropdown",
-              "value": "",
-              "values": [
-                {
-                  "id": "3",
-                  "label": {
-                    "en": "Eco",
-                    "no": "Økonomi"
-                  }
-                },
-                {
-                  "id": "4",
-                  "label": {
-                    "en": "Normal",
-                    "no": "Normal styring"
-                  }
-                },
-                {
-                  "id": "6",
-                  "label": {
-                    "en": "Price",
-                    "no": "Spotpris"
-                  }
-                },
-                {
-                  "id": "7",
-                  "label": {
-                    "en": "Schedule",
-                    "no": "Timeplan"
-                  }
-                },
-                {
-                  "id": "8",
-                  "label": {
-                    "en": "External",
-                    "no": "Ekstern styring"
-                  }
-                },
-                {
-                  "id": "10",
-                  "label": {
-                    "en": "Vacation",
-                    "no": "Ferie"
-                  }
-                },
-                {
-                  "id": "11",
-                  "label": "Boost"
-                }
-              ],
-              "label": "Program",
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_544",
-              "type": "dropdown",
-              "value": "",
-              "values": [
-                {
-                  "id": "1",
-                  "label": {
-                    "en": "NO1",
-                    "no": "NO1 Øst"
-                  }
-                },
-                {
-                  "id": "2",
-                  "label": {
-                    "en": "NO2",
-                    "no": "NO2 Sør"
-                  }
-                },
-                {
-                  "id": "3",
-                  "label": {
-                    "en": "NO3",
-                    "no": "NO3 Midt"
-                  }
-                },
-                {
-                  "id": "4",
-                  "label": {
-                    "en": "NO4",
-                    "no": "NO4 Nord"
-                  }
-                },
-                {
-                  "id": "5",
-                  "label": {
-                    "en": "NO5",
-                    "no": "NO5 Vest"
-                  }
-                }
-              ],
-              "label": {
-                "en": "Nordpool price region",
-                "no": "Prisregion for strømpriser"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_601",
-              "type": "dropdown",
-              "value": "",
-              "values": [
-                {
-                  "id": "1",
-                  "label": "heat"
-                }
-              ],
-              "label": "Zone mode",
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_100",
-              "type": "number",
-              "value": 0,
-              "min": 10,
-              "max": 35,
-              "step": 0.01,
-              "units": {
-                "en": "°C"
-              },
-              "label": {
-                "en": "Expected ambient temperature",
-                "no": "Antatt romtemperatur"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_101",
-              "type": "number",
-              "value": 0,
-              "min": 4,
-              "max": 20,
-              "step": 0.01,
-              "units": {
-                "en": "°C"
-              },
-              "label": {
-                "en": "Expected inlet water temperature",
-                "no": "Antatt temperatur på vann inn"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_200",
-              "type": "number",
-              "value": 0,
-              "min": 60,
-              "max": 85,
-              "step": 0.01,
-              "units": {
-                "en": "°C"
-              },
-              "label": {
-                "en": "Default boost setpoint",
-                "no": "Ønsket temperatur for boost"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_300",
-              "type": "number",
-              "value": 0,
-              "min": 35,
-              "max": 65,
-              "step": 0.01,
-              "units": {
-                "en": "°C"
-              },
-              "label": {
-                "en": "Default vacation setpoint",
-                "no": "Ønsket temperatur for feriemodus"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_516",
-              "type": "number",
-              "value": 0,
-              "min": 3,
-              "max": 10,
-              "step": 0.01,
-              "units": {
-                "en": "°C"
-              },
-              "label": {
-                "en": "Hysteresis",
-                "no": "Hysterese"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_548",
-              "type": "number",
-              "value": 0,
-              "min": 0,
-              "max": 20,
-              "step": 0.01,
-              "units": {
-                "en": "°C"
-              },
-              "label": {
-                "en": "Setpoint increase in cheap hours",
-                "no": "Temperaturøkning i billige timer"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_304",
-              "type": "number",
-              "value": 0,
-              "min": 0,
-              "max": 60,
-              "step": 1,
-              "units": {
-                "en": "min"
-              },
-              "label": {
-                "en": "Time before display dim",
-                "no": "Tid før display dimmes ned"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_305",
-              "type": "number",
-              "value": 0,
-              "min": 0,
-              "max": 240,
-              "step": 1,
-              "units": {
-                "en": "min"
-              },
-              "label": {
-                "en": "Time before display is turned off",
-                "no": "Tid før display slås av"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_308",
-              "type": "number",
-              "value": 0,
-              "min": -720,
-              "max": 720,
-              "step": 1,
-              "units": {
-                "en": "min"
-              },
-              "label": {
-                "en": "Timezone offset",
-                "no": "Tidssone"
-              },
-              "hint": {
-                "en": ""
-              }
-            }
-          ]
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "Status",
-            "no": "Status"
-          },
-          "children": [
-            {
-              "id": "status_518",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Serial number",
-                "no": "Serienummer"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_523",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Support multiple power settings",
-                "no": "Støtter regulering av effekt"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_406",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Current program",
-                "no": "Gjeldende program"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_505",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Element 2 status",
-                "no": "Element trinn 2 status"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_506",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Element 1 status",
-                "no": "Element trinn 1 status"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_549",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Current price type",
-                "no": "Gjeldende pristype"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_501",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Current program timeout",
-                "no": "Program endres om"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_507",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Element 2 time on",
-                "no": "Element trinn 2 tid på"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_508",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Element 1 time on",
-                "no": "Element trinn 1 tid på"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_509",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Time since last legionella prevention",
-                "no": "Tid siden siste legionellahemmende temperatur"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_514",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Next legionella prevention",
-                "no": "Neste legionella program"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_531",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Total runtime",
-                "no": "Total tid i drift"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_526",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Tank volume",
-                "no": "Tank volum"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_503",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Element 2 power",
-                "no": "Element trinn 2 effekt"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_504",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Element 1 power",
-                "no": "Element trinn 1 effekt"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_102",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Default eco setpoint",
-                "no": "Standard temperaturinstilling"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_551",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Current target temperature",
-                "no": "Gjeldende styringstemperatur"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_532",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Uptime",
-                "no": "Tid siden siste omstart"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_533",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Uptime (com)",
-                "no": "Tid siden siste omstart (WiFi)"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_534",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Uptime (connection)",
-                "no": "Tid siden siste tilkobling (MQTT)"
-              },
-              "hint": {
-                "en": ""
-              }
-            }
-          ]
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "System",
-            "no": "System"
-          },
-          "children": [
-            {
-              "id": "firmwareVersion",
-              "type": "label",
-              "label": {
-                "en": "Firmware Version",
-                "no": "Fastvareversjon"
-              },
-              "value": "???",
-              "hint": {
-                "en": "The Firmware version of the tank.",
-                "no": "Fastvareversjonen til tanken."
-              }
-            },
-            {
-              "id": "updateRate",
-              "type": "number",
-              "label": {
-                "en": "Refresh rate for capabilities",
-                "no": "Oppdateringsfrekvens for egenskaper"
-              },
-              "hint": {
-                "en": "Number of seconds between every refresh of the capabilities.",
-                "no": "Antall sekunder mellom hver oppdatering av enhetens egenskaper."
-              },
-              "value": 300,
-              "min": 5,
-              "max": 600,
-              "units": {
-                "en": "s"
-              }
-            },
-            {
-              "id": "updateRateSettings",
-              "type": "number",
-              "label": {
-                "en": "Refresh rate for settings",
-                "no": "Oppdateringsfrekvens for innstillinger"
-              },
-              "hint": {
-                "en": "Number of seconds between every refresh of the settings.",
-                "no": "Antall sekunder mellom hver oppdatering av innstillingene."
-              },
-              "value": 300,
-              "min": 60,
-              "max": 1800,
-              "units": {
-                "en": "s"
-              }
-            },
-            {
-              "id": "updateRateErr",
-              "type": "number",
-              "label": {
-                "en": "Waiting time after errors",
-                "no": "Ventetid ved feil"
-              },
-              "hint": {
-                "en": "Number of seconds to wait before retrying after a communication error with myUplink.",
-                "no": "Antall sekunder å vente før neste forsøk etter en kommunikasjonsfeil mot myUplink."
-              },
-              "value": 300,
-              "min": 60,
-              "max": 1800,
-              "units": {
-                "en": "s"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "platforms": [
-        "local",
-        "cloud"
-      ],
-      "connectivity": [
-        "cloud"
-      ],
-      "repair": [
-        {
-          "id": "login_oauth2",
-          "template": "login_oauth2"
-        }
-      ],
-      "images": {
-        "small": "/drivers/ConnectedRetrofit/assets/images/small.png",
-        "large": "/drivers/ConnectedRetrofit/assets/images/large.png",
-        "xlarge": "/drivers/ConnectedRetrofit/assets/images/xlarge.png"
-      },
-      "pair": [
-        {
-          "id": "login_oauth2",
-          "template": "login_oauth2"
-        },
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_devices"
-          }
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices"
-        }
-      ],
-      "id": "ConnectedRetrofit",
-      "name": {
-        "en": "Connected Retrofit Kit"
-      },
-      "class": "heater",
-      "capabilities": [
-        "max_power_2elem",
-        "measure_humidity.fill_level",
-        "measure_power",
-        "measure_temperature",
-        "meter_power",
-        "meter_power.in_tank",
-        "onoff",
-        "onoff.hwBoost",
-        "target_temperature"
-      ],
-      "capabilitiesOptions": {
-        "measure_humidity.fill_level": {
-          "title": {
-            "en": "Fill level",
-            "no": "Fyllingsgrad"
-          },
-          "units": "%"
-        },
-        "measure_power": {
-          "title": {
-            "en": "Estimated power",
-            "no": "Antatt effekt"
-          },
-          "units": "W"
-        },
-        "measure_temperature": {
-          "title": {
-            "en": "Temperature",
-            "no": "Temperatur"
-          },
-          "units": "°C"
-        },
-        "meter_power": {
-          "title": {
-            "en": "Total energy used",
-            "no": "Energi brukt totalt"
-          },
-          "units": "kWh"
-        },
-        "meter_power.in_tank": {
-          "title": {
-            "en": "Stored energy",
-            "no": "Energi i tanken"
-          },
-          "units": "kWh"
-        },
-        "onoff.hwBoost": {
-          "title": {
-            "en": "Boost active",
-            "no": "Boost funksjon aktiv"
-          },
-          "insightsTitleTrue": {
-            "en": "Boost Turned On",
-            "no": "Boost Slått på"
-          },
-          "insightsTitleFalse": {
-            "en": "Boost Turned Off",
-            "no": "Boost Slått av"
-          }
-        },
-        "target_temperature": {
-          "title": {
-            "en": "Setpoint",
-            "no": "Ønsket temperatur"
-          },
-          "step": 1,
-          "min": 20,
-          "max": 85,
-          "units": "°C"
-        }
-      },
-      "settings": [
-        {
-          "type": "group",
-          "label": {
-            "en": "Settings",
-            "no": "Innstillinger"
-          },
-          "children": [
-            {
-              "id": "setting_301",
-              "type": "number",
-              "value": 0,
-              "min": 4,
-              "max": 35,
-              "step": 1,
-              "units": {
-                "en": "day"
-              },
-              "label": {
-                "en": "Default vacation duration",
-                "no": "Standard varighet for feriemodus"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_512",
-              "type": "number",
-              "value": 0,
-              "min": 5,
-              "max": 40,
-              "step": 1,
-              "units": {
-                "en": "l/m"
-              },
-              "label": {
-                "en": "Max water flow",
-                "no": "Maksimalt vanntrykk ved bruk"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_201",
-              "type": "number",
-              "value": 0,
-              "min": 1,
-              "max": 99,
-              "step": 1,
-              "units": {
-                "en": "hour"
-              },
-              "label": {
-                "en": "Default boost duration",
-                "no": "Standard varighet for boost"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_307",
-              "type": "number",
-              "value": 0,
-              "min": 0.1,
-              "max": 15,
-              "step": 0.1,
-              "units": {
-                "en": "%"
-              },
-              "label": {
-                "en": "Power diff",
-                "no": "Avvik fra nominell effekt"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_546",
-              "type": "number",
-              "value": 0,
-              "min": 20,
-              "max": 100,
-              "step": 1,
-              "units": {
-                "en": "%"
-              },
-              "label": {
-                "en": "Minimum remaining heat in expensive hours",
-                "no": "Minimum restvarme i dyre timer"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
             {
               "id": "setting_105",
               "type": "number",
-              "value": 0,
+              "value": 10,
               "min": 10,
               "max": 500,
               "step": 1,
@@ -3263,7 +1321,8 @@
                 "no": "Overstyr retrofit tankvolum"
               },
               "hint": {
-                "en": ""
+                "en": "This setting is only available on retrofit devices. Trying to set it on other devices will result in failure to save the settings.",
+                "no": "Denne innstillingen er bare tilgjengelig på retrofit enheter. Dersom den settes for andre enheter vil du få en feilmelding."
               }
             },
             {
@@ -3281,13 +1340,14 @@
                 "no": "Overstyr retrofit effekttrinn 1"
               },
               "hint": {
-                "en": ""
+                "en": "This setting is only available on retrofit devices. Trying to set it on other devices will result in failure to save the settings.",
+                "no": "Denne innstillingen er bare tilgjengelig på retrofit enheter. Dersom den settes for andre enheter vil du få en feilmelding."
               }
             },
             {
               "id": "setting_107",
               "type": "number",
-              "value": 0,
+              "value": 500,
               "min": 500,
               "max": 15000,
               "step": 1,
@@ -3299,67 +1359,14 @@
                 "no": "Overstyr retrofit effekttrinn 2"
               },
               "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_511",
-              "type": "number",
-              "value": 0,
-              "min": 2,
-              "max": 8,
-              "step": 1,
-              "units": {
-                "en": "week"
-              },
-              "label": {
-                "en": "Time between legionella preventions",
-                "no": "Legionella program frekvens"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_545",
-              "type": "number",
-              "value": 0,
-              "min": 0,
-              "max": 18,
-              "step": 1,
-              "units": {
-                "en": ""
-              },
-              "label": {
-                "en": "Number of expensive hours",
-                "no": "Antall dyre timer per døgn"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_547",
-              "type": "number",
-              "value": 0,
-              "min": 0,
-              "max": 12,
-              "step": 1,
-              "units": {
-                "en": ""
-              },
-              "label": {
-                "en": "Number of cheap hours",
-                "no": "Antall billige timer per døgn"
-              },
-              "hint": {
-                "en": ""
+                "en": "This setting is only available on retrofit devices. Trying to set it on other devices will result in failure to save the settings.",
+                "no": "Denne innstillingen er bare tilgjengelig på retrofit enheter. Dersom den settes for andre enheter vil du få en feilmelding."
               }
             },
             {
               "id": "setting_103",
               "type": "dropdown",
-              "value": "",
+              "value": "0",
               "values": [
                 {
                   "id": "0",
@@ -3406,290 +1413,8 @@
                 "no": "Retrofit tank"
               },
               "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_500",
-              "type": "dropdown",
-              "value": "",
-              "values": [
-                {
-                  "id": "3",
-                  "label": {
-                    "en": "Eco",
-                    "no": "Økonomi"
-                  }
-                },
-                {
-                  "id": "4",
-                  "label": {
-                    "en": "Normal",
-                    "no": "Normal styring"
-                  }
-                },
-                {
-                  "id": "6",
-                  "label": {
-                    "en": "Price",
-                    "no": "Spotpris"
-                  }
-                },
-                {
-                  "id": "7",
-                  "label": {
-                    "en": "Schedule",
-                    "no": "Timeplan"
-                  }
-                },
-                {
-                  "id": "8",
-                  "label": {
-                    "en": "External",
-                    "no": "Ekstern styring"
-                  }
-                },
-                {
-                  "id": "10",
-                  "label": {
-                    "en": "Vacation",
-                    "no": "Ferie"
-                  }
-                },
-                {
-                  "id": "11",
-                  "label": "Boost"
-                }
-              ],
-              "label": "Program",
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_544",
-              "type": "dropdown",
-              "value": "",
-              "values": [
-                {
-                  "id": "1",
-                  "label": {
-                    "en": "NO1",
-                    "no": "NO1 Øst"
-                  }
-                },
-                {
-                  "id": "2",
-                  "label": {
-                    "en": "NO2",
-                    "no": "NO2 Sør"
-                  }
-                },
-                {
-                  "id": "3",
-                  "label": {
-                    "en": "NO3",
-                    "no": "NO3 Midt"
-                  }
-                },
-                {
-                  "id": "4",
-                  "label": {
-                    "en": "NO4",
-                    "no": "NO4 Nord"
-                  }
-                },
-                {
-                  "id": "5",
-                  "label": {
-                    "en": "NO5",
-                    "no": "NO5 Vest"
-                  }
-                }
-              ],
-              "label": {
-                "en": "Nordpool price region",
-                "no": "Prisregion for strømpriser"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_601",
-              "type": "dropdown",
-              "value": "",
-              "values": [
-                {
-                  "id": "1",
-                  "label": "heat"
-                }
-              ],
-              "label": "Zone mode",
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_100",
-              "type": "number",
-              "value": 0,
-              "min": 10,
-              "max": 35,
-              "step": 0.01,
-              "units": {
-                "en": "°C"
-              },
-              "label": {
-                "en": "Expected ambient temperature",
-                "no": "Antatt romtemperatur"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_101",
-              "type": "number",
-              "value": 0,
-              "min": 4,
-              "max": 20,
-              "step": 0.01,
-              "units": {
-                "en": "°C"
-              },
-              "label": {
-                "en": "Expected inlet water temperature",
-                "no": "Antatt temperatur på vann inn"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_200",
-              "type": "number",
-              "value": 0,
-              "min": 60,
-              "max": 85,
-              "step": 0.01,
-              "units": {
-                "en": "°C"
-              },
-              "label": {
-                "en": "Default boost setpoint",
-                "no": "Ønsket temperatur for boost"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_300",
-              "type": "number",
-              "value": 0,
-              "min": 35,
-              "max": 65,
-              "step": 0.01,
-              "units": {
-                "en": "°C"
-              },
-              "label": {
-                "en": "Default vacation setpoint",
-                "no": "Ønsket temperatur for feriemodus"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_516",
-              "type": "number",
-              "value": 0,
-              "min": 3,
-              "max": 10,
-              "step": 0.01,
-              "units": {
-                "en": "°C"
-              },
-              "label": {
-                "en": "Hysteresis",
-                "no": "Hysterese"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_548",
-              "type": "number",
-              "value": 0,
-              "min": 0,
-              "max": 20,
-              "step": 0.01,
-              "units": {
-                "en": "°C"
-              },
-              "label": {
-                "en": "Setpoint increase in cheap hours",
-                "no": "Temperaturøkning i billige timer"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_304",
-              "type": "number",
-              "value": 0,
-              "min": 0,
-              "max": 60,
-              "step": 1,
-              "units": {
-                "en": "min"
-              },
-              "label": {
-                "en": "Time before display dim",
-                "no": "Tid før display dimmes ned"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_305",
-              "type": "number",
-              "value": 0,
-              "min": 0,
-              "max": 240,
-              "step": 1,
-              "units": {
-                "en": "min"
-              },
-              "label": {
-                "en": "Time before display is turned off",
-                "no": "Tid før display slås av"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "setting_308",
-              "type": "number",
-              "value": 0,
-              "min": -720,
-              "max": 720,
-              "step": 1,
-              "units": {
-                "en": "min"
-              },
-              "label": {
-                "en": "Timezone offset",
-                "no": "Tidssone"
-              },
-              "hint": {
-                "en": ""
+                "en": "This setting is only available on retrofit devices. Trying to set it on other devices will result in failure to save the settings.",
+                "no": "Denne innstillingen er bare tilgjengelig på retrofit enheter. Dersom den settes for andre enheter vil du få en feilmelding."
               }
             }
           ]
@@ -3697,248 +1422,199 @@
         {
           "type": "group",
           "label": {
-            "en": "Status",
-            "no": "Status"
+            "en": "Status for Express devices",
+            "no": "Status for Express enheter"
           },
           "children": [
             {
-              "id": "status_518",
+              "id": "status_522",
               "type": "label",
-              "value": "",
+              "value": "N/A",
               "label": {
-                "en": "Serial number",
-                "no": "Serienummer"
+                "en": "Support express program",
+                "no": "Støtter ekspress"
               },
               "hint": {
-                "en": ""
+                "en": "This status is only available on express devices.",
+                "no": "Denne statusen er bare tilgjengelig på ekspress enheter."
               }
             },
             {
-              "id": "status_523",
+              "id": "status_537",
               "type": "label",
-              "value": "",
+              "value": "N/A",
               "label": {
-                "en": "Support multiple power settings",
-                "no": "Støtter regulering av effekt"
+                "en": "Bottom element status",
+                "no": "Status nedre element"
               },
               "hint": {
-                "en": ""
+                "en": "This status is only available on express devices.",
+                "no": "Denne statusen er bare tilgjengelig på ekspress enheter."
               }
             },
             {
-              "id": "status_406",
+              "id": "status_538",
               "type": "label",
-              "value": "",
+              "value": "N/A",
               "label": {
-                "en": "Current program",
-                "no": "Gjeldende program"
+                "en": "Top element status",
+                "no": "Status øvre element"
               },
               "hint": {
-                "en": ""
+                "en": "This status is only available on express devices.",
+                "no": "Denne statusen er bare tilgjengelig på ekspress enheter."
               }
             },
+            {
+              "id": "status_539",
+              "type": "label",
+              "value": "N/A",
+              "label": {
+                "en": "Bottom element time on",
+                "no": "Nedre element tid på"
+              },
+              "hint": {
+                "en": "This status is only available on express devices.",
+                "no": "Denne statusen er bare tilgjengelig på ekspress enheter."
+              }
+            },
+            {
+              "id": "status_540",
+              "type": "label",
+              "value": "N/A",
+              "label": {
+                "en": "Top element time on",
+                "no": "Øvre element tid på"
+              },
+              "hint": {
+                "en": "This status is only available on express devices.",
+                "no": "Denne statusen er bare tilgjengelig på ekspress enheter."
+              }
+            },
+            {
+              "id": "status_535",
+              "type": "label",
+              "value": "N/A",
+              "label": {
+                "en": "Bottom element power",
+                "no": "Nedre element effekt"
+              },
+              "hint": {
+                "en": "This status is only available on express devices.",
+                "no": "Denne statusen er bare tilgjengelig på ekspress enheter."
+              }
+            },
+            {
+              "id": "status_536",
+              "type": "label",
+              "value": "N/A",
+              "label": {
+                "en": "Top element power",
+                "no": "Øvre element effekt"
+              },
+              "hint": {
+                "en": "This status is only available on express devices.",
+                "no": "Denne statusen er bare tilgjengelig på ekspress enheter."
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Status for Regular devices",
+            "no": "Status for Vanlige enheter"
+          },
+          "children": [
             {
               "id": "status_505",
               "type": "label",
-              "value": "",
+              "value": "N/A",
               "label": {
                 "en": "Element 2 status",
                 "no": "Element trinn 2 status"
               },
               "hint": {
-                "en": ""
+                "en": "This status is not available on express devices.",
+                "no": "Denne statusen er ikke tilgjengelig på ekspress enheter."
               }
             },
             {
               "id": "status_506",
               "type": "label",
-              "value": "",
+              "value": "N/A",
               "label": {
                 "en": "Element 1 status",
                 "no": "Element trinn 1 status"
               },
               "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_549",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Current price type",
-                "no": "Gjeldende pristype"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_501",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Current program timeout",
-                "no": "Program endres om"
-              },
-              "hint": {
-                "en": ""
+                "en": "This status is not available on express devices.",
+                "no": "Denne statusen er ikke tilgjengelig på ekspress enheter."
               }
             },
             {
               "id": "status_507",
               "type": "label",
-              "value": "",
+              "value": "N/A",
               "label": {
                 "en": "Element 2 time on",
                 "no": "Element trinn 2 tid på"
               },
               "hint": {
-                "en": ""
+                "en": "This status is not available on express devices.",
+                "no": "Denne statusen er ikke tilgjengelig på ekspress enheter."
               }
             },
             {
               "id": "status_508",
               "type": "label",
-              "value": "",
+              "value": "N/A",
               "label": {
                 "en": "Element 1 time on",
                 "no": "Element trinn 1 tid på"
               },
               "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_509",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Time since last legionella prevention",
-                "no": "Tid siden siste legionellahemmende temperatur"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_514",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Next legionella prevention",
-                "no": "Neste legionella program"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_531",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Total runtime",
-                "no": "Total tid i drift"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_526",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Tank volume",
-                "no": "Tank volum"
-              },
-              "hint": {
-                "en": ""
+                "en": "This status is not available on express devices.",
+                "no": "Denne statusen er ikke tilgjengelig på ekspress enheter."
               }
             },
             {
               "id": "status_503",
               "type": "label",
-              "value": "",
+              "value": "N/A",
               "label": {
                 "en": "Element 2 power",
                 "no": "Element trinn 2 effekt"
               },
               "hint": {
-                "en": ""
+                "en": "This status is not available on express devices.",
+                "no": "Denne statusen er ikke tilgjengelig på ekspress enheter."
               }
             },
             {
               "id": "status_504",
               "type": "label",
-              "value": "",
+              "value": "N/A",
               "label": {
                 "en": "Element 1 power",
                 "no": "Element trinn 1 effekt"
               },
               "hint": {
-                "en": ""
+                "en": "This status is not available on express devices.",
+                "no": "Denne statusen er ikke tilgjengelig på ekspress enheter."
               }
             },
             {
-              "id": "status_102",
+              "id": "status_523",
               "type": "label",
-              "value": "",
+              "value": "N/A",
               "label": {
-                "en": "Default eco setpoint",
-                "no": "Standard temperaturinstilling"
+                "en": "Support multiple power settings",
+                "no": "Støtter regulering av effekt"
               },
               "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_551",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Current target temperature",
-                "no": "Gjeldende styringstemperatur"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_532",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Uptime",
-                "no": "Tid siden siste omstart"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_533",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Uptime (com)",
-                "no": "Tid siden siste omstart (WiFi)"
-              },
-              "hint": {
-                "en": ""
-              }
-            },
-            {
-              "id": "status_534",
-              "type": "label",
-              "value": "",
-              "label": {
-                "en": "Uptime (connection)",
-                "no": "Tid siden siste tilkobling (MQTT)"
-              },
-              "hint": {
-                "en": ""
+                "en": "This status is not available on express devices.",
+                "no": "Denne statusen er ikke tilgjengelig på ekspress enheter."
               }
             }
           ]
@@ -3959,8 +1635,8 @@
               },
               "value": "???",
               "hint": {
-                "en": "The Firmware version of the tank.",
-                "no": "Fastvareversjonen til tanken."
+                "en": "The Firmware version of the device.",
+                "no": "Fastvareversjonen til enheten."
               }
             },
             {
@@ -3973,6 +1649,24 @@
               "hint": {
                 "en": "Number of seconds between every refresh of the capabilities.",
                 "no": "Antall sekunder mellom hver oppdatering av enhetens egenskaper."
+              },
+              "value": 300,
+              "min": 5,
+              "max": 600,
+              "units": {
+                "en": "s"
+              }
+            },
+            {
+              "id": "updateRateCache",
+              "type": "number",
+              "label": {
+                "en": "Refresh rate for flows",
+                "no": "Oppdateringsfrekvens for flytkort"
+              },
+              "hint": {
+                "en": "Number of seconds between every refresh of flow cards.",
+                "no": "Antall sekunder mellom hver oppdatering av flytkort."
               },
               "value": 300,
               "min": 5,
@@ -4029,25 +1723,32 @@
       "connectivity": [
         "cloud"
       ],
-      "repair": [
-        {
-          "id": "login_oauth2",
-          "template": "login_oauth2"
-        }
-      ],
       "images": {
-        "small": "/drivers/NibeS1255/assets/images/small.png",
-        "large": "/drivers/NibeS1255/assets/images/large.png",
-        "xlarge": "/drivers/NibeS1255/assets/images/xlarge.png"
+        "small": "/drivers/nibe/assets/images/small.png",
+        "large": "/drivers/nibe/assets/images/large.png",
+        "xlarge": "/drivers/nibe/assets/images/xlarge.png"
       },
       "pair": [
         {
           "id": "login_oauth2",
-          "template": "login_oauth2"
+          "template": "login_oauth2",
+          "navigation": {
+            "next": "loading"
+          }
+        },
+        {
+          "id": "loading",
+          "template": "loading",
+          "navigation": {
+            "next": "list_devices"
+          }
         },
         {
           "id": "list_devices",
           "template": "list_devices",
+          "options": {
+            "singular": true
+          },
           "navigation": {
             "next": "add_devices"
           }
@@ -4057,59 +1758,19 @@
           "template": "add_devices"
         }
       ],
-      "id": "NibeS1255",
+      "repair": [
+        {
+          "id": "login_oauth2",
+          "template": "login_oauth2"
+        }
+      ],
+      "id": "nibe",
       "name": {
-        "en": "Nibe S1255 (not ready)"
+        "en": "Nibe"
       },
       "class": "heater",
-      "capabilities": [
-        "max_power_2000",
-        "measure_temperature",
-        "measure_temperature.hw6",
-        "measure_temperature.hw7",
-        "measure_temperature.indoor19",
-        "measure_temperature.indoor20",
-        "measure_temperature.indoor21",
-        "measure_temperature.indoor22",
-        "measure_temperature.indoor23",
-        "measure_temperature.indoor24",
-        "measure_temperature.outdoor11",
-        "measure_temperature.return13",
-        "measure_temperature.return14",
-        "measure_temperature.return5",
-        "measure_temperature.return8",
-        "measure_temperature.supply10",
-        "measure_temperature.supply12",
-        "measure_temperature.supply15",
-        "measure_temperature.supply16",
-        "measure_temperature.supply17",
-        "measure_temperature.supply18",
-        "measure_temperature.supply2",
-        "measure_temperature.supply3",
-        "measure_temperature.supply4",
-        "measure_temperature.supply9",
-        "meter_power",
-        "meter_power.sub2",
-        "meter_power.sub3",
-        "meter_power.sub4",
-        "meter_power.sub5",
-        "onoff",
-        "onoff.hwBoost1",
-        "onoff.ventBoost1",
-        "target_temperature",
-        "target_temperature.indoor5",
-        "target_temperature.indoor6",
-        "target_temperature.indoor7",
-        "target_temperature.offsCool4",
-        "target_temperature.offsHeat2",
-        "target_temperature.offsHeat3"
-      ],
+      "capabilities": [],
       "capabilitiesOptions": {
-        "max_power_2000": {
-          "title": {
-            "en": "TODO Capability name"
-          }
-        },
         "measure_temperature": {
           "title": {
             "en": "Current outdoor temper­ature (BT1)",
@@ -4355,17 +2016,6 @@
           "min": 0,
           "max": 999999.9,
           "units": "kWh"
-        },
-        "onoff": {
-          "title": {
-            "en": "TODO Capability name"
-          },
-          "insightsTitleTrue": {
-            "en": "TODO Turned On"
-          },
-          "insightsTitleFalse": {
-            "en": "TODO Turned Off"
-          }
         },
         "onoff.hwBoost1": {
           "title": {
@@ -5076,8 +2726,8 @@
               },
               "value": "???",
               "hint": {
-                "en": "The Firmware version of the tank.",
-                "no": "Fastvareversjonen til tanken."
+                "en": "The Firmware version of the device.",
+                "no": "Fastvareversjonen til enheten."
               }
             },
             {
@@ -5117,181 +2767,19 @@
               }
             },
             {
-              "id": "updateRateErr",
+              "id": "updateRateCache",
               "type": "number",
               "label": {
-                "en": "Waiting time after errors",
-                "no": "Ventetid ved feil"
+                "en": "Refresh rate for flows",
+                "no": "Oppdateringsfrekvens for flytkort"
               },
               "hint": {
-                "en": "Number of seconds to wait before retrying after a communication error with myUplink.",
-                "no": "Antall sekunder å vente før neste forsøk etter en kommunikasjonsfeil mot myUplink."
-              },
-              "value": 300,
-              "min": 60,
-              "max": 1800,
-              "units": {
-                "en": "s"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "platforms": [
-        "local",
-        "cloud"
-      ],
-      "connectivity": [
-        "cloud"
-      ],
-      "repair": [
-        {
-          "id": "login_oauth2",
-          "template": "login_oauth2"
-        }
-      ],
-      "images": {
-        "small": "/drivers/generic/assets/images/small.png",
-        "large": "/drivers/generic/assets/images/large.png",
-        "xlarge": "/drivers/generic/assets/images/xlarge.png"
-      },
-      "id": "generic",
-      "name": {
-        "en": "Generic Device"
-      },
-      "class": "heater",
-      "capabilities": [
-        "onoff",
-        "meter_power",
-        "target_temperature",
-        "measure_temperature",
-        "max_power_2000"
-      ],
-      "capabilitiesOptions": {},
-      "pair": [
-        {
-          "id": "login_oauth2",
-          "template": "login_oauth2",
-          "navigation": {
-            "next": "generic_info"
-          }
-        },
-        {
-          "id": "generic_info",
-          "navigation": {
-            "next": "list_devices"
-          }
-        },
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "options": {
-            "singular": true
-          },
-          "navigation": {
-            "next": "configure_device"
-          }
-        },
-        {
-          "id": "configure_device",
-          "navigation": {
-            "next": "add_devices"
-          }
-        },
-        {
-          "id": "add_onoff"
-        },
-        {
-          "id": "add_thermostat"
-        },
-        {
-          "id": "add_tempsensor"
-        },
-        {
-          "id": "add_powersensor"
-        },
-        {
-          "id": "add_powermeter"
-        },
-        {
-          "id": "add_alarm"
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices"
-        }
-      ],
-      "settings": [
-        {
-          "type": "group",
-          "label": {
-            "en": "Settings",
-            "no": "Innstillinger"
-          },
-          "children": []
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "Status",
-            "no": "Status"
-          },
-          "children": []
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "System",
-            "no": "System"
-          },
-          "children": [
-            {
-              "id": "firmwareVersion",
-              "type": "label",
-              "label": {
-                "en": "Firmware Version",
-                "no": "Fastvareversjon"
-              },
-              "value": "???",
-              "hint": {
-                "en": "The Firmware version of the tank.",
-                "no": "Fastvareversjonen til tanken."
-              }
-            },
-            {
-              "id": "updateRate",
-              "type": "number",
-              "label": {
-                "en": "Refresh rate for capabilities",
-                "no": "Oppdateringsfrekvens for egenskaper"
-              },
-              "hint": {
-                "en": "Number of seconds between every refresh of the capabilities.",
-                "no": "Antall sekunder mellom hver oppdatering av enhetens egenskaper."
+                "en": "Number of seconds between every refresh of flow cards.",
+                "no": "Antall sekunder mellom hver oppdatering av flytkort."
               },
               "value": 300,
               "min": 5,
               "max": 600,
-              "units": {
-                "en": "s"
-              }
-            },
-            {
-              "id": "updateRateSettings",
-              "type": "number",
-              "label": {
-                "en": "Refresh rate for settings",
-                "no": "Oppdateringsfrekvens for innstillinger"
-              },
-              "hint": {
-                "en": "Number of seconds between every refresh of the settings.",
-                "no": "Antall sekunder mellom hver oppdatering av innstillingene."
-              },
-              "value": 300,
-              "min": 60,
-              "max": 1800,
               "units": {
                 "en": "s"
               }
@@ -5359,6 +2847,10 @@
       "uiQuickAction": true
     },
     "max_power_2elem": {
+      "platforms": [
+        "local",
+        "cloud"
+      ],
       "type": "enum",
       "title": {
         "en": "Max power",
@@ -5393,6 +2885,10 @@
       "uiQuickAction": true
     },
     "max_power_3000": {
+      "platforms": [
+        "local",
+        "cloud"
+      ],
       "type": "enum",
       "title": {
         "en": "Max power",

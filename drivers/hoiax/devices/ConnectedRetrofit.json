@@ -1,0 +1,1175 @@
+{
+  "name": "Connected Retrofit Kit",
+  "icon": "ConnectedRetrofit.svg",
+  "basedOnHelp": "The basedOn is the deviceId of a device you want to use the myUplink dump for to create the dump",
+  "basedOn": "Homey Retrofit ",
+  "filterHelp": "The filter identifies which devices are of this type",
+  "filter": {
+    "deviceName": "*****RE*************"
+  },
+  "capabilities": [
+    "max_power_2elem",
+    "measure_humidity.fill_level",
+    "measure_power",
+    "measure_temperature",
+    "meter_power",
+    "meter_power.in_tank",
+    "onoff",
+    "onoff.hwBoost",
+    "target_temperature"
+  ],
+  "onChangeHelp": "How to affect variables when an ID or variable changes",
+  "onChange": {
+    "517": {
+      "$onOff": "#517 ? 1 : 0",
+      "$power": "#517 ? #517 : $power"
+    },
+    "all": {},
+    "$onOff": {
+      "517": "$onOff ? $power : 0"
+    },
+    "$power": {
+      "517": "$onOff ? $power : 0"
+    }
+  },
+  "onCreatedHelp": "How to set myUplink state and variables when the device is created",
+  "onCreated": {
+    "500": 8,
+    "$power": 3,
+    "$onOff": true
+  },
+  "capHelp": "The capability Table is used to automatically create capabilities and link it to its respective identifiers in myUplink",
+  "capTable": {
+    "302": "meter_power.in_tank",
+    "303": "meter_power",
+    "400": "measure_power",
+    "404": "measure_humidity.fill_level",
+    "527": "target_temperature",
+    "528": "measure_temperature",
+    "600": "onoff.hwBoost",
+    "$onOff": "onoff",
+    "$power": "max_power_2elem"
+  },
+  "settingsHelp": "The settings table is used to expose myUplink features as settings",
+  "settingsTable": {
+    "100": "setting_100",
+    "101": "setting_101",
+    "103": "setting_103",
+    "105": "setting_105",
+    "106": "setting_106",
+    "107": "setting_107",
+    "200": "setting_200",
+    "201": "setting_201",
+    "300": "setting_300",
+    "301": "setting_301",
+    "304": "setting_304",
+    "305": "setting_305",
+    "307": "setting_307",
+    "308": "setting_308",
+    "500": "setting_500",
+    "511": "setting_511",
+    "512": "setting_512",
+    "516": "setting_516",
+    "544": "setting_544",
+    "545": "setting_545",
+    "546": "setting_546",
+    "547": "setting_547",
+    "548": "setting_548",
+    "601": "setting_601"
+  },
+  "statusHelp": "The status table is used to expose myUplink features as status",
+  "statusTable": {
+    "102": "status_102",
+    "406": "status_406",
+    "501": "status_501",
+    "503": "status_503",
+    "504": "status_504",
+    "505": "status_505",
+    "506": "status_506",
+    "507": "status_507",
+    "508": "status_508",
+    "509": "status_509",
+    "514": "status_514",
+    "518": "status_518",
+    "523": "status_523",
+    "526": "status_526",
+    "531": "status_531",
+    "532": "status_532",
+    "533": "status_533",
+    "534": "status_534",
+    "549": "status_549",
+    "551": "status_551"
+  },
+  "ignoredHelp": "The ignored table list capabilities that are not exposed at all",
+  "ignoredTable": {},
+  "devPointTable": {
+    "100": {
+      "parameterName": {
+        "en": "Expected ambient temperature",
+        "no": "Antatt romtemperatur"
+      },
+      "parameterUnit": "°C",
+      "writable": true,
+      "minValue": 1000,
+      "maxValue": 3500,
+      "enumValues": [],
+      "scaleValue": "0.01",
+      "stepValue": 100,
+      "type": 1
+    },
+    "101": {
+      "parameterName": {
+        "en": "Expected inlet water temperature",
+        "no": "Antatt temperatur på vann inn"
+      },
+      "parameterUnit": "°C",
+      "writable": true,
+      "minValue": 400,
+      "maxValue": 2000,
+      "enumValues": [],
+      "scaleValue": "0.01",
+      "stepValue": 100,
+      "type": 1
+    },
+    "102": {
+      "parameterName": {
+        "en": "Default eco setpoint",
+        "no": "Standard temperaturinstilling"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.01",
+      "stepValue": 1,
+      "type": 1
+    },
+    "103": {
+      "parameterName": {
+        "en": "Retrofit tank type",
+        "no": "Retrofit tank"
+      },
+      "parameterUnit": "",
+      "writable": true,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [
+        {
+          "value": "0",
+          "text": {
+            "en": "User defined",
+            "no": "Egendefinert"
+          },
+          "icon": ""
+        },
+        {
+          "value": "1",
+          "text": "120 700+1300W",
+          "icon": ""
+        },
+        {
+          "value": "2",
+          "text": "120 2kW",
+          "icon": ""
+        },
+        {
+          "value": "3",
+          "text": "200 700+1300W",
+          "icon": ""
+        },
+        {
+          "value": "4",
+          "text": "200 2kW",
+          "icon": ""
+        },
+        {
+          "value": "7",
+          "text": "250 700+1300W",
+          "icon": ""
+        },
+        {
+          "value": "8",
+          "text": "250 2kW",
+          "icon": ""
+        },
+        {
+          "value": "9",
+          "text": "300 1250+1750W",
+          "icon": ""
+        },
+        {
+          "value": "10",
+          "text": "300 3kW",
+          "icon": ""
+        }
+      ],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 2
+    },
+    "105": {
+      "parameterName": {
+        "en": "Override retrofit tank volume",
+        "no": "Overstyr retrofit tankvolum"
+      },
+      "parameterUnit": "l",
+      "writable": true,
+      "minValue": 10,
+      "maxValue": 500,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "106": {
+      "parameterName": {
+        "en": "Override retrofit power 1",
+        "no": "Overstyr retrofit effekttrinn 1"
+      },
+      "parameterUnit": "W",
+      "writable": true,
+      "minValue": 0,
+      "maxValue": 15000,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 50,
+      "type": 1
+    },
+    "107": {
+      "parameterName": {
+        "en": "Override retrofit power 2",
+        "no": "Overstyr retrofit effekttrinn 2"
+      },
+      "parameterUnit": "W",
+      "writable": true,
+      "minValue": 500,
+      "maxValue": 15000,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 50,
+      "type": 1
+    },
+    "200": {
+      "parameterName": {
+        "en": "Default boost setpoint",
+        "no": "Ønsket temperatur for boost"
+      },
+      "parameterUnit": "°C",
+      "writable": true,
+      "minValue": 6000,
+      "maxValue": 8500,
+      "enumValues": [],
+      "scaleValue": "0.01",
+      "stepValue": 100,
+      "type": 1
+    },
+    "201": {
+      "parameterName": {
+        "en": "Default boost duration",
+        "no": "Standard varighet for boost"
+      },
+      "parameterUnit": "hour",
+      "writable": true,
+      "minValue": 1,
+      "maxValue": 99,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "300": {
+      "parameterName": {
+        "en": "Default vacation setpoint",
+        "no": "Ønsket temperatur for feriemodus"
+      },
+      "parameterUnit": "°C",
+      "writable": true,
+      "minValue": 3500,
+      "maxValue": 6500,
+      "enumValues": [],
+      "scaleValue": "0.01",
+      "stepValue": 100,
+      "type": 1
+    },
+    "301": {
+      "parameterName": {
+        "en": "Default vacation duration",
+        "no": "Standard varighet for feriemodus"
+      },
+      "parameterUnit": "day",
+      "writable": true,
+      "minValue": 4,
+      "maxValue": 35,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "302": {
+      "parameterName": {
+        "en": "Stored energy",
+        "no": "Energi i tanken"
+      },
+      "parameterUnit": "kWh",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.001",
+      "stepValue": 1,
+      "type": 1
+    },
+    "303": {
+      "parameterName": {
+        "en": "Total energy used",
+        "no": "Energi brukt totalt"
+      },
+      "parameterUnit": "kWh",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.001",
+      "stepValue": 1,
+      "type": 1
+    },
+    "304": {
+      "parameterName": {
+        "en": "Time before display dim",
+        "no": "Tid før display dimmes ned"
+      },
+      "parameterUnit": "min",
+      "writable": true,
+      "minValue": 0,
+      "maxValue": 60,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "305": {
+      "parameterName": {
+        "en": "Time before display is turned off",
+        "no": "Tid før display slås av"
+      },
+      "parameterUnit": "min",
+      "writable": true,
+      "minValue": 0,
+      "maxValue": 240,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "307": {
+      "parameterName": {
+        "en": "Power diff",
+        "no": "Avvik fra nominell effekt"
+      },
+      "parameterUnit": "%",
+      "writable": true,
+      "minValue": 1,
+      "maxValue": 150,
+      "enumValues": [],
+      "scaleValue": "0.1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "308": {
+      "parameterName": {
+        "en": "Timezone offset",
+        "no": "Tidssone"
+      },
+      "parameterUnit": "min",
+      "writable": true,
+      "minValue": -720,
+      "maxValue": 720,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 30,
+      "type": 1
+    },
+    "400": {
+      "parameterName": {
+        "en": "Estimated power",
+        "no": "Antatt effekt"
+      },
+      "parameterUnit": "W",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "404": {
+      "parameterName": {
+        "en": "Fill level",
+        "no": "Fyllingsgrad"
+      },
+      "parameterUnit": "%",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "406": {
+      "parameterName": {
+        "en": "Current program",
+        "no": "Gjeldende program"
+      },
+      "parameterUnit": "",
+      "writable": false,
+      "minValue": 0,
+      "maxValue": 11,
+      "enumValues": [
+        {
+          "value": "0",
+          "text": "Test",
+          "icon": ""
+        },
+        {
+          "value": "1",
+          "text": {
+            "en": "Off",
+            "no": "Av"
+          },
+          "icon": ""
+        },
+        {
+          "value": "2",
+          "text": {
+            "en": "Sleep",
+            "no": "Inaktiv"
+          },
+          "icon": ""
+        },
+        {
+          "value": "3",
+          "text": {
+            "en": "Eco",
+            "no": "Økonomi"
+          },
+          "icon": ""
+        },
+        {
+          "value": "4",
+          "text": {
+            "en": "Normal",
+            "no": "Normal styring"
+          },
+          "icon": ""
+        },
+        {
+          "value": "5",
+          "text": {
+            "en": "Express",
+            "no": "Ekspress"
+          },
+          "icon": ""
+        },
+        {
+          "value": "6",
+          "text": {
+            "en": "Price",
+            "no": "Spotpris"
+          },
+          "icon": ""
+        },
+        {
+          "value": "7",
+          "text": {
+            "en": "Schedule",
+            "no": "Timeplan"
+          },
+          "icon": ""
+        },
+        {
+          "value": "8",
+          "text": {
+            "en": "External",
+            "no": "Ekstern styring"
+          },
+          "icon": ""
+        },
+        {
+          "value": "9",
+          "text": {
+            "en": "Legionella",
+            "no": "Legionella beskyttelse"
+          },
+          "icon": ""
+        },
+        {
+          "value": "10",
+          "text": {
+            "en": "Vacation",
+            "no": "Ferie"
+          },
+          "icon": ""
+        },
+        {
+          "value": "11",
+          "text": "Boost",
+          "icon": ""
+        }
+      ],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 2
+    },
+    "500": {
+      "parameterName": "Program",
+      "parameterUnit": "",
+      "writable": true,
+      "minValue": 0,
+      "maxValue": 11,
+      "enumValues": [
+        {
+          "value": "3",
+          "text": {
+            "en": "Eco",
+            "no": "Økonomi"
+          },
+          "icon": ""
+        },
+        {
+          "value": "4",
+          "text": {
+            "en": "Normal",
+            "no": "Normal styring"
+          },
+          "icon": ""
+        },
+        {
+          "value": "6",
+          "text": {
+            "en": "Price",
+            "no": "Spotpris"
+          },
+          "icon": ""
+        },
+        {
+          "value": "7",
+          "text": {
+            "en": "Schedule",
+            "no": "Timeplan"
+          },
+          "icon": ""
+        },
+        {
+          "value": "8",
+          "text": {
+            "en": "External",
+            "no": "Ekstern styring"
+          },
+          "icon": ""
+        },
+        {
+          "value": "10",
+          "text": {
+            "en": "Vacation",
+            "no": "Ferie"
+          },
+          "icon": ""
+        },
+        {
+          "value": "11",
+          "text": "Boost",
+          "icon": ""
+        }
+      ],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 2
+    },
+    "501": {
+      "parameterName": {
+        "en": "Current program timeout",
+        "no": "Program endres om"
+      },
+      "parameterUnit": "h",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "503": {
+      "parameterName": {
+        "en": "Element 2 power",
+        "no": "Element trinn 2 effekt"
+      },
+      "parameterUnit": "W",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "504": {
+      "parameterName": {
+        "en": "Element 1 power",
+        "no": "Element trinn 1 effekt"
+      },
+      "parameterUnit": "W",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "505": {
+      "parameterName": {
+        "en": "Element 2 status",
+        "no": "Element trinn 2 status"
+      },
+      "parameterUnit": "",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [
+        {
+          "value": "0",
+          "text": {
+            "en": "Off",
+            "no": "Av"
+          },
+          "icon": ""
+        },
+        {
+          "value": "1",
+          "text": {
+            "en": "On",
+            "no": "På"
+          },
+          "icon": ""
+        }
+      ],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 2
+    },
+    "506": {
+      "parameterName": {
+        "en": "Element 1 status",
+        "no": "Element trinn 1 status"
+      },
+      "parameterUnit": "",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [
+        {
+          "value": "0",
+          "text": {
+            "en": "Off",
+            "no": "Av"
+          },
+          "icon": ""
+        },
+        {
+          "value": "1",
+          "text": {
+            "en": "On",
+            "no": "På"
+          },
+          "icon": ""
+        }
+      ],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 2
+    },
+    "507": {
+      "parameterName": {
+        "en": "Element 2 time on",
+        "no": "Element trinn 2 tid på"
+      },
+      "parameterUnit": "h",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "508": {
+      "parameterName": {
+        "en": "Element 1 time on",
+        "no": "Element trinn 1 tid på"
+      },
+      "parameterUnit": "h",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "509": {
+      "parameterName": {
+        "en": "Time since last legionella prevention",
+        "no": "Tid siden siste legionellahemmende temperatur"
+      },
+      "parameterUnit": "h",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "511": {
+      "parameterName": {
+        "en": "Time between legionella preventions",
+        "no": "Legionella program frekvens"
+      },
+      "parameterUnit": "week",
+      "writable": true,
+      "minValue": 2,
+      "maxValue": 8,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "512": {
+      "parameterName": {
+        "en": "Max water flow",
+        "no": "Maksimalt vanntrykk ved bruk"
+      },
+      "parameterUnit": "l/m",
+      "writable": true,
+      "minValue": 5,
+      "maxValue": 40,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "514": {
+      "parameterName": {
+        "en": "Next legionella prevention",
+        "no": "Neste legionella program"
+      },
+      "parameterUnit": "h",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "516": {
+      "parameterName": {
+        "en": "Hysteresis",
+        "no": "Hysterese"
+      },
+      "parameterUnit": "°C",
+      "writable": true,
+      "minValue": 300,
+      "maxValue": 1000,
+      "enumValues": [],
+      "scaleValue": "0.01",
+      "stepValue": 50,
+      "type": 1
+    },
+    "517": {
+      "parameterName": {
+        "en": "Power",
+        "no": "Ønsket effekt"
+      },
+      "parameterUnit": "",
+      "writable": true,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [
+        {
+          "value": "0",
+          "text": {
+            "en": "Off",
+            "no": "Av"
+          },
+          "icon": ""
+        },
+        {
+          "value": "1",
+          "text": "1250W",
+          "icon": ""
+        },
+        {
+          "value": "2",
+          "text": "1750W",
+          "icon": ""
+        },
+        {
+          "value": "3",
+          "text": "3000W",
+          "icon": ""
+        }
+      ],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 2
+    },
+    "518": {
+      "parameterName": {
+        "en": "Serial number",
+        "no": "Serienummer"
+      },
+      "parameterUnit": "",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "523": {
+      "parameterName": {
+        "en": "Support multiple power settings",
+        "no": "Støtter regulering av effekt"
+      },
+      "parameterUnit": "",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "526": {
+      "parameterName": {
+        "en": "Tank volume",
+        "no": "Tank volum"
+      },
+      "parameterUnit": "l",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "527": {
+      "parameterName": {
+        "en": "Setpoint",
+        "no": "Ønsket temperatur"
+      },
+      "parameterUnit": "°C",
+      "writable": true,
+      "minValue": 2000,
+      "maxValue": 8500,
+      "enumValues": [],
+      "scaleValue": "0.01",
+      "stepValue": 100,
+      "type": 1
+    },
+    "528": {
+      "parameterName": {
+        "en": "Temperature",
+        "no": "Temperatur"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.01",
+      "stepValue": 1,
+      "type": 1
+    },
+    "531": {
+      "parameterName": {
+        "en": "Total runtime",
+        "no": "Total tid i drift"
+      },
+      "parameterUnit": "h",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "532": {
+      "parameterName": {
+        "en": "Uptime",
+        "no": "Tid siden siste omstart"
+      },
+      "parameterUnit": "min",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "533": {
+      "parameterName": {
+        "en": "Uptime (com)",
+        "no": "Tid siden siste omstart (WiFi)"
+      },
+      "parameterUnit": "min",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "534": {
+      "parameterName": {
+        "en": "Uptime (connection)",
+        "no": "Tid siden siste tilkobling (MQTT)"
+      },
+      "parameterUnit": "min",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "544": {
+      "parameterName": {
+        "en": "Nordpool price region",
+        "no": "Prisregion for strømpriser"
+      },
+      "parameterUnit": "",
+      "writable": true,
+      "minValue": 1,
+      "maxValue": 5,
+      "enumValues": [
+        {
+          "value": "1",
+          "text": {
+            "en": "NO1",
+            "no": "NO1 Øst"
+          },
+          "icon": ""
+        },
+        {
+          "value": "2",
+          "text": {
+            "en": "NO2",
+            "no": "NO2 Sør"
+          },
+          "icon": ""
+        },
+        {
+          "value": "3",
+          "text": {
+            "en": "NO3",
+            "no": "NO3 Midt"
+          },
+          "icon": ""
+        },
+        {
+          "value": "4",
+          "text": {
+            "en": "NO4",
+            "no": "NO4 Nord"
+          },
+          "icon": ""
+        },
+        {
+          "value": "5",
+          "text": {
+            "en": "NO5",
+            "no": "NO5 Vest"
+          },
+          "icon": ""
+        }
+      ],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 2
+    },
+    "545": {
+      "parameterName": {
+        "en": "Number of expensive hours",
+        "no": "Antall dyre timer per døgn"
+      },
+      "parameterUnit": "",
+      "writable": true,
+      "minValue": 0,
+      "maxValue": 18,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "546": {
+      "parameterName": {
+        "en": "Minimum remaining heat in expensive hours",
+        "no": "Minimum restvarme i dyre timer"
+      },
+      "parameterUnit": "%",
+      "writable": true,
+      "minValue": 20,
+      "maxValue": 100,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "547": {
+      "parameterName": {
+        "en": "Number of cheap hours",
+        "no": "Antall billige timer per døgn"
+      },
+      "parameterUnit": "",
+      "writable": true,
+      "minValue": 0,
+      "maxValue": 12,
+      "enumValues": [],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 1
+    },
+    "548": {
+      "parameterName": {
+        "en": "Setpoint increase in cheap hours",
+        "no": "Temperaturøkning i billige timer"
+      },
+      "parameterUnit": "°C",
+      "writable": true,
+      "minValue": 0,
+      "maxValue": 2000,
+      "enumValues": [],
+      "scaleValue": "0.01",
+      "stepValue": 100,
+      "type": 1
+    },
+    "549": {
+      "parameterName": {
+        "en": "Current price type",
+        "no": "Gjeldende pristype"
+      },
+      "parameterUnit": "",
+      "writable": false,
+      "minValue": 0,
+      "maxValue": 3,
+      "enumValues": [
+        {
+          "value": "0",
+          "text": {
+            "en": "Unknown",
+            "no": "Ukjent"
+          },
+          "icon": ""
+        },
+        {
+          "value": "1",
+          "text": {
+            "en": "Cheap",
+            "no": "Billig"
+          },
+          "icon": ""
+        },
+        {
+          "value": "2",
+          "text": "Normal",
+          "icon": ""
+        },
+        {
+          "value": "3",
+          "text": {
+            "en": "Expensive",
+            "no": "Dyr"
+          },
+          "icon": ""
+        }
+      ],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 2
+    },
+    "551": {
+      "parameterName": {
+        "en": "Current target temperature",
+        "no": "Gjeldende styringstemperatur"
+      },
+      "parameterUnit": "°C",
+      "writable": false,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [],
+      "scaleValue": "0.01",
+      "stepValue": 1,
+      "type": 1
+    },
+    "600": {
+      "parameterName": {
+        "en": "Boost active",
+        "no": "Boost funksjon aktiv"
+      },
+      "parameterUnit": "",
+      "writable": true,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [
+        {
+          "value": "0",
+          "text": {
+            "en": "Off",
+            "no": "Av"
+          },
+          "icon": ""
+        },
+        {
+          "value": "1",
+          "text": {
+            "en": "On",
+            "no": "På"
+          },
+          "icon": ""
+        }
+      ],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 2
+    },
+    "601": {
+      "parameterName": "Zone mode",
+      "parameterUnit": "",
+      "writable": true,
+      "minValue": null,
+      "maxValue": null,
+      "enumValues": [
+        {
+          "value": "1",
+          "text": "heat",
+          "icon": ""
+        }
+      ],
+      "scaleValue": "1",
+      "stepValue": 1,
+      "type": 2
+    }
+  }
+}

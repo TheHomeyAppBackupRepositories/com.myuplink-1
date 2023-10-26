@@ -1,0 +1,5 @@
+<script type="application/javascript">
+  Homey.showLoadingOverlay();
+  Homey.getViewStoreValue("add_devices", "devices")
+      .then((devices) => Homey.emit("updateDevice", devices[0]));
+</script>

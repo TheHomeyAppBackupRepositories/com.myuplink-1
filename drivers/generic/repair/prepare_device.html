@@ -1,0 +1,15 @@
+<script type="application/javascript">
+  Homey.showLoadingOverlay();
+  Homey.emit("getDevice", {})
+    .then((device) => {
+      return Promise.resolve()
+        .then(() => Homey.setViewStoreValue("configure_device", "onoffDefs", device.store.onoffDefs))
+        .then(() => Homey.setViewStoreValue("configure_device", "termoDefs", device.store.termoDefs))
+        .then(() => Homey.setViewStoreValue("configure_device", "sensorDefs", device.store.tempDefs))
+        .then(() => Homey.setViewStoreValue("configure_device", "powSenseDefs", device.store.powerDefs))
+        .then(() => Homey.setViewStoreValue("configure_device", "powMeterDefs", device.store.meterDefs))
+        .then(() => Homey.setViewStoreValue("configure_device", "alarmDefs", device.store.alarmDefs))
+        .then(() => Homey.setViewStoreValue("add_devices", "devices", [device]));
+    })
+    .then(() => Homey.showView('configure_device'));
+</script>
